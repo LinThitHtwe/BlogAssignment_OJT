@@ -7,31 +7,23 @@ const NavbarComponent = () => {
       bg="white"
       expand="lg"
       variant="dark"
-      className="d-flex justify-content-between px-5"
-      style={{ boxShadow: "0px 1px 0px 0px #00000029" }}
+      className="d-flex justify-content-between px-5 navbar"
     >
-      <Navbar.Brand
-        href="/"
-        style={{ color: "black", fontWeight: "400" }}
-        className="display-5"
-      >
+      <Navbar.Brand href="/" className="display-5 navbar-brand">
         NORDIC ROSE
       </Navbar.Brand>
 
-      <Nav
-        className="ml-auto  "
-        style={{ fontSize: "1.0rem", fontWeight: "300" }}
-      >
-        <Nav.Link href="#" style={{ color: "black" }}>
+      <Nav className="ml-auto nav ">
+        <Nav.Link className="nav-link" href="#">
           BLOG
         </Nav.Link>
-        <Nav.Link href="#" style={{ color: "black" }}>
+        <Nav.Link className="nav-link" href="#">
           ABOUT
         </Nav.Link>
-        <Nav.Link href="#" style={{ color: "black" }}>
+        <Nav.Link className="nav-link" href="#">
           LINKS
         </Nav.Link>
-        <Nav.Link href="#" style={{ color: "black" }}>
+        <Nav.Link className="nav-link" href="#">
           PROJECTS
         </Nav.Link>
       </Nav>
