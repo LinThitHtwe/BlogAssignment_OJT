@@ -14,17 +14,54 @@
   color: #333 !important;
 }
 
-.toggle-button {
-  display: none;
-}
-
 .nav-item {
   margin-left: auto !important;
 }
 
-@media (max-width: 450px) {
-  .toggle-button {
-    color: #333 !important;
-    display: block !important;
+.main-blog-title {
+  width: 45%;
+}
+
+.main-blog-subtext {
+  width: 25%;
+  font-weight: 350 !important;
+}
+
+.all-article-container {
+  margin-top: 2.5rem;
+  width: 65% !important;
+}
+.all-article-image-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+.all-article-row {
+  margin-bottom: 60px;
+}
+
+.all-article-title {
+  padding: 0 2.75rem;
+  margin-top: 20px;
+  font-weight: 500 !important;
+}
+
+.all-article-image {
+  object-fit: cover;
+  width: 100%;
+  height: 250px !important;
+}
+
+@media (max-width: 768px) {
+  .all-article-container {
+    width: 98% !important;
+  }
+  .main-blog-title {
+    width: 93%;
+  }
+  .main-blog-subtext {
+    width: 78%;
   }
 }
