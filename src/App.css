@@ -13,3 +13,18 @@
 .nav-link {
   color: #333 !important;
 }
+
+.toggle-button {
+  display: none;
+}
+
+.nav-item {
+  margin-left: auto !important;
+}
+
+@media (max-width: 450px) {
+  .toggle-button {
+    color: #333 !important;
+    display: block !important;
+  }
+}
