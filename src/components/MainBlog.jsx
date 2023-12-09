@@ -9,14 +9,11 @@ const MainBlog = () => {
         alt="Responsive image"
       />
 
-      <p className="text-center h2 " style={{ width: "45%" }}>
+      <p className="text-center h2 main-blog-title">
         A few words about this blog platform, Ghost, and how this site was made
       </p>
 
-      <p
-        className="text-center h5 border-bottom border-black pb-4 w-25"
-        style={{ fontWeight: 350 }}
-      >
+      <p className="text-center h5 border-bottom border-black pb-4  main-blog-subtext">
         Why Ghost (& Figma) instead of Medium, WordPress or other options?
       </p>
     </div>
