@@ -65,3 +65,26 @@
     width: 78%;
   }
 }
+
+.marquee-text {
+  font-size: 20px;
+  font-weight: 300;
+  margin: 10px 10px;
+}
+
+.marquee-text.bold-text {
+  font-weight: bold;
+}
+
+.footer-description {
+  width: 35%;
+  font-size: 13px;
+  font-weight: 300;
+  align-content: center;
+}
+
+.footer {
+  height: 350px !important;
+  background-color: #000 !important;
+  color: #fff !important;
+}
