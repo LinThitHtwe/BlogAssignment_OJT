@@ -12,12 +12,12 @@ const Footer = () => {
         style={{}}
       >
         {footerMarquee.map((footer, index) => (
-          <a
+          <span
             key={index}
             className={`marquee-text ${index % 2 === 1 ? "bold-text" : ""}`}
           >
             {footer}
-          </a>
+          </span>
         ))}
       </marquee>
       <p className="text-center mt-4 pt-3 display-6">NORDIC ROSE</p>
@@ -40,7 +40,7 @@ const Footer = () => {
       </p>
 
       <p className="h6 mt-4">© 2012–2020 Nordic Rose Co.</p>
-      <p className="h6 "> All rights reserved.</p>
+      <p className="h6 ">All rights reserved.</p>
     </div>
   );
 };
