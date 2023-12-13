@@ -10,7 +10,7 @@ const SignUpForm = () => {
           newsletter. Your email is never shared.{" "}
         </p>
         <div className="d-flex w-75">
-          <input className="w-75 p-3" />
+          <input className="w-75 p-3" placeholder="Enter Your Email" />
           <button className="bg-black p-3 text-white">SIGN UP</button>
         </div>
       </div>
