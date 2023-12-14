@@ -1,16 +1,15 @@
 import "./App.css";
-import NavbarComponent from "./components/NavbarComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import Home from "./pages/Home";
-import Footer from "./components/Footer";
+
+import { RouterProvider } from "react-router-dom";
+
+import { router } from "./routes/router";
 
 function App() {
   return (
     <>
-      <NavbarComponent />
-      <Home />
-      <Footer />
+      <RouterProvider router={router} />
     </>
   );
 }
