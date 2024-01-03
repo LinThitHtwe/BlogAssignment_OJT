@@ -150,3 +150,39 @@
   background-color: #000 !important;
   color: #fff !important;
 }
+
+.signin-with-google {
+  border: 1px solid #d4d4d4;
+  background-color: #fff !important;
+  border-radius: 5px !important;
+  padding: 12px 10px !important;
+  width: 36rem !important;
+}
+
+.or-text {
+  color: #333;
+}
+
+.login-signup-input {
+  width: 590px !important;
+  padding: 10px 10px !important;
+}
+
+.secondary-btn-login-signup {
+  border: 1px solid #d4d4d4 !important;
+}
+
+.login-signup-line {
+  border-top: 1px solid #d4d4d4;
+  width: 250px;
+}
+
+@media (max-width: 767px) {
+  .login-signup-input {
+    width: 250px !important;
+  }
+
+  .login-signup-line {
+    width: 100%;
+  }
+}
