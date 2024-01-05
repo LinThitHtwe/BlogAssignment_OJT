@@ -1,6 +1,6 @@
+import ReadNext from "components/ReadNext";
+import SignUpForm from "components/SignUpForm";
 import React from "react";
-import ReadNext from "../components/ReadNext";
-import SignUpForm from "../components/SignUpForm";
 
 const BlogDetail = () => {
   return (

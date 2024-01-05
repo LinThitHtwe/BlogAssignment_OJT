@@ -1,6 +1,7 @@
+import AllArticles from "components/AllArticles";
+import MainBlog from "components/MainBlog";
 import React from "react";
-import MainBlog from "../components/MainBlog";
-import AllArticles from "../components/AllArticles";
+
 
 const Home = () => {
   return (
