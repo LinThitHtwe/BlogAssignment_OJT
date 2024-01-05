@@ -1,14 +1,14 @@
-// import Footer from "@/components/Footer";
-// import NavbarComponent from "@/components/NavbarComponent";
 import React from "react";
+import NavbarComponent from "components/NavbarComponent";
 import { Outlet } from "react-router-dom";
+import Footer from "components/Footer";
 
 const Layout = () => {
   return (
     <>
-      {/* <NavbarComponent /> */}
+      <NavbarComponent />
       <Outlet />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

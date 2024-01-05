@@ -156,7 +156,7 @@
   background-color: #fff !important;
   border-radius: 5px !important;
   padding: 12px 10px !important;
-  width: 36rem !important;
+  width: 40vw !important;
 }
 
 .or-text {
@@ -164,7 +164,7 @@
 }
 
 .login-signup-input {
-  width: 590px !important;
+  width: 40vw !important;
   padding: 10px 10px !important;
 }
 
@@ -174,15 +174,31 @@
 
 .login-signup-line {
   border-top: 1px solid #d4d4d4;
-  width: 250px;
+  width: 10vw;
 }
 
-@media (max-width: 767px) {
-  .login-signup-input {
-    width: 250px !important;
+.login-signup-image {
+  width: 100vh !important;
+}
+
+.login-signup-btn {
+  width: 40%;
+}
+.custom-login-signup-column {
+  width: 100% !important;
+}
+
+@media (max-width: 610px) {
+  .login-signup-image {
+    height: 30vh !important;
+    width: 150vw !important;
+    object-fit: cover;
   }
 
-  .login-signup-line {
-    width: 100%;
+  .login-signup-input {
+    width: 70vw !important;
+  }
+  .login-signup-btn {
+    width: 100% !important;
   }
 }
