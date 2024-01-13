@@ -24,7 +24,7 @@ const SignUpForm = () => {
           If you want relevant updates occasionally, sign up for the private
           newsletter. Your email is never shared.
         </p>
-        <div className="d-flex w-75">
+        <div className="d-flex w-100">
           <Formik
             initialValues={{
               email: "",
@@ -37,17 +37,24 @@ const SignUpForm = () => {
             validateOnBlur={true}
           >
             {({ values, errors, handleSubmit, handleChange }) => (
-              <Form onSubmit={handleSubmit}>
+              <Form
+                className="d-flex justify-content-center w-100 gap-2"
+                onSubmit={handleSubmit}
+              >
                 <input
-                  className="w-75 p-3"
+                  className="w-75 p-3 position-relative"
                   type="email"
                   name="email"
                   onChange={handleChange}
                   value={values.email}
                   placeholder="Enter Your Email"
                 />
-                {errors.email && <p>{errors.email}</p>}
-                <button className="bg-black p-3 text-white">SIGN UP</button>
+                {errors.email && (
+                  <p className="position-absolute top-0 left-0">
+                    {errors.email}
+                  </p>
+                )}
+                <button className="bg-black p-1 text-white">SIGN UP</button>
               </Form>
             )}
           </Formik>
