@@ -18,7 +18,7 @@ const BlogDetail = () => {
         alt="Responsive image"
       />
       <div className="my-5 border-top border-black author-container p-4">
-        <div className="d-flex justify-content-between">
+        <div className="d-flex flex-column justify-content-between flex-md-row">
           <div className="d-flex  gap-2">
             <img src="profile.png" className="profile-image" />
             <div>
@@ -104,12 +104,12 @@ const BlogDetail = () => {
         <p className="mt-4 pt-4">Thanks for reading,</p>
         <span>Mika</span>
 
-        <div className="mt-5 pt-3 d-flex justify-content-center">
-          <div className="share-link-container d-flex gap-3 p-2 align-items-center">
+        <div className="mt-5 pt-3 d-flex flex-column flex-md-row gap-2  justify-content-center">
+          <div className="share-link-container d-flex gap-3 p-2 align-items-center rounded">
             <i className="fa-brands fa-facebook"></i>
             <span>Share on Facebook</span>
           </div>
-          <div className="share-link-container d-flex gap-3 p-2 align-items-center">
+          <div className="share-link-container d-flex gap-3 p-2 align-items-center rounded">
             <i class="fa-brands fa-twitter"></i>
             <span>Share on Twitter</span>
           </div>
@@ -124,7 +124,7 @@ const BlogDetail = () => {
             culture
           </a>
         </div>
-        <div className="d-flex mt-5 gap-2">
+        <div className="d-flex flex-column flex-md-row mt-5 gap-2">
           <img src="profile.png" className="profile-image" />
           <p className="p-0 text-uppercase font-weight-bold">
             <span className="name-bold">Mika Matikainen</span> is a Design

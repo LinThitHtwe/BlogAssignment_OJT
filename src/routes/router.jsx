@@ -5,6 +5,7 @@ import BlogDetail from "../pages/BlogDetail";
 import Login from "../pages/Login";
 import LoginSignupLayout from "../layout/LoginSignupLayout";
 import Register from "pages/Register";
+import routes from "./routes";
 
 export const router = createBrowserRouter([
   {
@@ -27,11 +28,11 @@ export const router = createBrowserRouter([
     element: <LoginSignupLayout />,
     children: [
       {
-        path: "/login",
+        path: routes.login,
         element: <Login />,
       },
       {
-        path: "/register",
+        path: routes.register,
         element: <Register />,
       },
     ],
