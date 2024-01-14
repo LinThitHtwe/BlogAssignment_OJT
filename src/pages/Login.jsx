@@ -1,7 +1,18 @@
 import React from "react";
-import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
+import { Button, Col, Container, Image, Row } from "react-bootstrap";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import { loginRegistervalidationSchema } from "validations/validator";
+import { login } from "api/APIs";
 
 const Login = () => {
+  const handleSubmit = async (values) => {
+    try {
+      const response = await login({ ...values });
+      console.log("Login successful:", response.data);
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
+  };
   return (
     <Container fluid className="overflow-hidden">
       <Row className="d-flex flex-column flex-md-row ">
@@ -26,34 +37,66 @@ const Login = () => {
                 <p className="or-text">or</p>
                 <div className="login-signup-line mt-3 mb-4"></div>
               </div>
-              <Form className="d-flex flex-column gap-4">
-                <Form.Control
-                  className="login-signup-input"
-                  size="lg"
-                  type="text"
-                  placeholder="username"
-                />
+              <Formik
+                initialValues={{ email: "", password: "" }}
+                validationSchema={loginRegistervalidationSchema}
+                onSubmit={(values, { setSubmitting }) => {
+                  setSubmitting(false);
+                  handleSubmit(values);
+                }}
+              >
+                <Form className="d-flex flex-column gap-4">
+                  <div>
+                    <Field
+                      className="form-control login-signup-input"
+                      type="text"
+                      id="email"
+                      name="email"
+                      placeholder="Email"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className="text-danger"
+                    />
+                  </div>
 
-                <Form.Control
-                  className="login-signup-input"
-                  size="lg"
-                  type="password"
-                  placeholder="password"
-                />
-              </Form>
-              <div className="d-flex flex-column flex-lg-row w-100 mt-5 justify-content-around align-items-center md:gap-4">
-                <Button className="login-signup-btn" variant="dark" size="lg">
-                  Sign Up
-                </Button>
-                <p className="mt-2 or-text md:mt-3">or</p>
-                <Button
-                  className="login-signup-btn secondary-btn-login-signup"
-                  variant="light"
-                  size="lg"
-                >
-                  Sign In
-                </Button>
-              </div>
+                  <div>
+                    <Field
+                      className="form-control login-signup-input"
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="Password"
+                    />
+                    <ErrorMessage
+                      name="password"
+                      component="div"
+                      className="text-danger"
+                    />
+                  </div>
+
+                  <div className="d-flex flex-column flex-lg-row w-100 mt-5 justify-content-around align-items-center md:gap-4">
+                    <Button
+                      type="submit"
+                      className="login-signup-btn"
+                      variant="dark"
+                      size="lg"
+                    >
+                      Sign Up
+                    </Button>
+                    <p className="mt-2 or-text md:mt-3">or</p>
+                    <Button
+                      type="button"
+                      className="login-signup-btn secondary-btn-login-signup"
+                      variant="light"
+                      size="lg"
+                    >
+                      Sign In
+                    </Button>
+                  </div>
+                </Form>
+              </Formik>
             </div>
           </div>
         </Col>
