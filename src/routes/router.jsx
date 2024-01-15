@@ -5,7 +5,7 @@ import BlogDetail from "../pages/BlogDetail";
 import Login from "../pages/Login";
 import LoginSignupLayout from "../layout/LoginSignupLayout";
 import Register from "pages/Register";
-import routes from "./routes";
+import routes from "../constants/routes";
 
 export const router = createBrowserRouter([
   {
@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/detail",
+        path: "/blog/:id",
         element: <BlogDetail />,
       },
     ],

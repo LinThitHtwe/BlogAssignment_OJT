@@ -1,8 +1,17 @@
+import { getBlogById } from "api/APIs";
+import BlogDetailAuthor from "components/BlogDetailAuthor";
 import ReadNext from "components/ReadNext";
 import SignUpForm from "components/SignUpForm";
+import useFetchData from "hooks/useFetchData";
 import React from "react";
+import { useParams } from "react-router-dom";
 
 const BlogDetail = () => {
+  const { id } = useParams();
+  const { data, isLoading } = useFetchData(["blogs"], () => getBlogById(id));
+  if (data) {
+    // console.log(data.data.creator);
+  }
   return (
     <div className="d-flex flex-column  mt-4  justify-content-center align-items-center gap-4  ">
       <p className="text-center h2 main-blog-title">
@@ -18,26 +27,8 @@ const BlogDetail = () => {
         alt="Responsive image"
       />
       <div className="my-5 border-top border-black author-container p-4">
-        <div className="d-flex flex-column justify-content-between flex-md-row">
-          <div className="d-flex  gap-2">
-            <img src="profile.png" className="profile-image" />
-            <div>
-              <p className="p-0 text-uppercase font-weight-bold">
-                Mika Matikainen
-              </p>
-              <p className="p-0">Apr 15, 2020 · 4 min read</p>
-            </div>
-          </div>
-          <div className="d-flex  h-100 i ">
-            <span className="icon-container">
-              <i className="fa-brands fa-facebook"></i>
-            </span>
-            <span className="icon-container">
-              <i class="fa-brands fa-twitter"></i>
-            </span>
-          </div>
-        </div>
-        <p className="mt-3">
+        {data && <BlogDetailAuthor author={data.data.creator} />}
+        <p className="mt-3 p-0">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tenetur
           laborum nihil voluptatem a vero dolore commodi assumenda explicabo
           ipsum, ad magni aliquam ratione officiis hic architecto ipsam maiores
@@ -64,7 +55,6 @@ const BlogDetail = () => {
           posuere maximus dui et fringilla.Morbi efficitur auctor metus, id
           mollis lorem pellentesque id. Nullam posuere maximus dui et fringilla.
         </p>
-
         <div className="image-container text-black">
           <img src="blog_detail.jpeg" alt="Blog Detail Image" />
         </div>
@@ -72,7 +62,6 @@ const BlogDetail = () => {
           Image caption centered this way and I’ll make this a bit longer to
           indicate the amount of line-height.
         </p>
-
         <p className="mt-5 pt-3">
           Aenean pharetra quis lacus at viverra. Class aptent taciti sociosqu ad
           litora torquent per conubia nostra, per inceptos himenaeos. Aliquam
@@ -86,6 +75,7 @@ const BlogDetail = () => {
           Morbi efficitur auctor metus, id mollis lorem pellentesque id. Nullam
           posuere maximus dui et fringilla. Nulla non volutpat leo.
         </p>
+
         <p>A list looks like this:</p>
         <ul className="d-flex  flex-column gap-3">
           <li>First Item in List</li>
@@ -96,21 +86,19 @@ const BlogDetail = () => {
           </li>
           <li>Thrid Item in List</li>
         </ul>
-
         <p>
           Class aptent taciti sociosqu ad litora torquent per conubia nostra,
           per inceptos himenaeos. Aliquam quis posuere ligula.{" "}
         </p>
         <p className="mt-4 pt-4">Thanks for reading,</p>
         <span>Mika</span>
-
         <div className="mt-5 pt-3 d-flex flex-column flex-md-row gap-2  justify-content-center">
           <div className="share-link-container d-flex gap-3 p-2 align-items-center rounded">
             <i className="fa-brands fa-facebook"></i>
             <span>Share on Facebook</span>
           </div>
           <div className="share-link-container d-flex gap-3 p-2 align-items-center rounded">
-            <i class="fa-brands fa-twitter"></i>
+            <i className="fa-brands fa-twitter"></i>
             <span>Share on Twitter</span>
           </div>
         </div>

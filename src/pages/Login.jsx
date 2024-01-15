@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { loginRegistervalidationSchema } from "validations/validator";
+import { loginValidationSchema } from "validations/validator";
 import { login } from "api/APIs";
 
 const Login = () => {
@@ -15,7 +15,7 @@ const Login = () => {
   };
   return (
     <Container fluid className="overflow-hidden">
-      <Row className="d-flex flex-column flex-md-row ">
+      <Row className="d-flex flex-column flex-md-row login-conainter">
         <Col className="custom-login-signup-column h-100 p-0">
           <Image
             className="img-fluid login-signup-image"
@@ -27,7 +27,7 @@ const Login = () => {
           <div className="p-3 p-lg-5 h-auto">
             <div className="d-flex justify-content-center flex-column align-items-center p-3 p-lg-5">
               <h1 className="font-bold mb-5  text-center text-md-start  mb-md-0 w-100">
-                Sign Up
+                Login
               </h1>
               <button className="signin-with-google mt-5">
                 <i className="fab fa-google"></i> Continue With Google
@@ -39,7 +39,7 @@ const Login = () => {
               </div>
               <Formik
                 initialValues={{ email: "", password: "" }}
-                validationSchema={loginRegistervalidationSchema}
+                validationSchema={loginValidationSchema}
                 onSubmit={(values, { setSubmitting }) => {
                   setSubmitting(false);
                   handleSubmit(values);
@@ -83,7 +83,7 @@ const Login = () => {
                       variant="dark"
                       size="lg"
                     >
-                      Sign Up
+                      Sign In
                     </Button>
                     <p className="mt-2 or-text md:mt-3">or</p>
                     <Button
@@ -92,7 +92,7 @@ const Login = () => {
                       variant="light"
                       size="lg"
                     >
-                      Sign In
+                      Sign Up
                     </Button>
                   </div>
                 </Form>

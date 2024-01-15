@@ -4,13 +4,7 @@ import { footerMarquee } from "../data/footerMarquee";
 const Footer = () => {
   return (
     <div className="d-flex flex-column  align-items-center footer">
-      <marquee
-        className="p-2"
-        direction="left"
-        loop="-1"
-        scrollamount="8"
-        style={{}}
-      >
+      <marquee className="p-3" direction="left" loop="-1" scrollamount="8">
         {footerMarquee.map((footer, index) => (
           <span
             key={index}

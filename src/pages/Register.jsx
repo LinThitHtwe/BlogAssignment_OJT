@@ -1,9 +1,15 @@
+import { signup } from "api/APIs";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
-import { loginRegistervalidationSchema } from "validations/validator";
+import { registerValidationSchema } from "validations/validator";
 
 const Register = () => {
+  const handleSubmit = async (values) => {
+    console.log(values);
+    const response = await signup(values);
+    console.log(response);
+  };
   return (
     <Container fluid className="overflow-hidden">
       <Row className="d-flex flex-column flex-md-row ">
@@ -29,11 +35,11 @@ const Register = () => {
                 <div className="login-signup-line mt-3 mb-4"></div>
               </div>
               <Formik
-                initialValues={{ email: "", password: "" }}
-                validationSchema={loginRegistervalidationSchema}
+                initialValues={{ username: "", email: "", password: "" }}
+                validationSchema={registerValidationSchema}
                 onSubmit={(values, { setSubmitting }) => {
                   setSubmitting(false);
-                  console.log(values);
+                  handleSubmit(values);
                 }}
               >
                 <Form className="d-flex flex-column gap-4">
@@ -41,6 +47,20 @@ const Register = () => {
                     <Field
                       className="form-control login-signup-input"
                       type="text"
+                      id="username"
+                      name="username"
+                      placeholder="Username"
+                    />
+                    <ErrorMessage
+                      name="username"
+                      component="div"
+                      className="text-danger"
+                    />
+                  </div>
+                  <div>
+                    <Field
+                      className="form-control login-signup-input"
+                      type="email"
                       id="email"
                       name="email"
                       placeholder="Email"
