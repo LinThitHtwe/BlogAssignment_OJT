@@ -5,6 +5,8 @@ import { loginValidationSchema } from "validations/validator";
 import { login } from "api/APIs";
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
+import routes from "constants/routes";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const {
@@ -108,7 +110,12 @@ const Login = () => {
                       variant="light"
                       size="lg"
                     >
-                      Sign Up
+                      <Link
+                        className="text-decoration-none text-black"
+                        to={routes.register}
+                      >
+                        Sign Up
+                      </Link>
                     </Button>
                   </div>
                 </Form>
