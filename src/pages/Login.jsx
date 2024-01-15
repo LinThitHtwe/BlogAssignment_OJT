@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { loginValidationSchema } from "validations/validator";
 import { login } from "api/APIs";
+import { useMutation } from "react-query";
+import toast from "react-hot-toast";
 
 const Login = () => {
-  const handleSubmit = async (values) => {
-    try {
-      const response = await login({ ...values });
-      console.log("Login successful:", response.data);
-    } catch (error) {
-      console.error("Login failed:", error);
-    }
+  const {
+    mutate: loginUser,
+    isLoading,
+    isError,
+    error,
+  } = useMutation(login, {
+    onSuccess: () => console.log("success"),
+    onError: (error) => {
+      if (error.response.status == 404) {
+        toast.error("Wrong Email Address");
+      }
+      if (error.response.status == 401) {
+        toast.error("Wrong Password");
+      }
+    },
+  });
+  const handleSubmit = (values) => {
+    loginUser(values);
   };
   return (
     <Container fluid className="overflow-hidden">
@@ -29,6 +42,7 @@ const Login = () => {
               <h1 className="font-bold mb-5  text-center text-md-start  mb-md-0 w-100">
                 Login
               </h1>
+
               <button className="signin-with-google mt-5">
                 <i className="fab fa-google"></i> Continue With Google
               </button>
@@ -78,6 +92,7 @@ const Login = () => {
 
                   <div className="d-flex flex-column flex-lg-row w-100 mt-5 justify-content-around align-items-center md:gap-4">
                     <Button
+                      disabled={isLoading}
                       type="submit"
                       className="login-signup-btn"
                       variant="dark"
@@ -87,6 +102,7 @@ const Login = () => {
                     </Button>
                     <p className="mt-2 or-text md:mt-3">or</p>
                     <Button
+                      disabled={isLoading}
                       type="button"
                       className="login-signup-btn secondary-btn-login-signup"
                       variant="light"
