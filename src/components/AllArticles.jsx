@@ -1,6 +1,8 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { articles } from "../data/articles";
+import { allBlogs } from "api/APIs";
+import useFetchData from "hooks/useFetchData";
 const AllArticles = () => {
   return (
     <Container className="all-article-container">
