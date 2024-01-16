@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { registerValidationSchema } from "validations/validator";
 
 const Register = () => {
-  const naviagtion = useNavigate();
+  const navigation = useNavigate();
   const {
     mutate: registerUser,
     isLoading,
@@ -20,7 +20,7 @@ const Register = () => {
     onSuccess: (responseData) => {
       setCookie("authToken", responseData.data.data.token, 8);
       toast.success("Register Successful");
-      naviagtion("/");
+      navigation("/");
     },
     onError: (error) => {
       if (error.response.status == 409) {

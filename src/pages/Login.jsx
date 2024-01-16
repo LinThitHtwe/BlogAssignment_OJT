@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { loginValidationSchema } from "validations/validator";
@@ -6,22 +6,32 @@ import { login } from "api/APIs";
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
 import routes from "constants/routes";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { setCookie } from "helpers/setCookie";
 
 const Login = () => {
+  const navigation = useNavigate();
   const {
     mutate: loginUser,
     isLoading,
     isError,
     error,
   } = useMutation(login, {
-    onSuccess: () => console.log("success"),
+    onSuccess: (responseData) => {
+      setCookie("authToken", responseData.data.data.token, 8);
+      toast.success("Register Successful");
+      navigation("/");
+    },
     onError: (error) => {
-      if (error.response.status == 404) {
+      if (error.response.status === 404) {
         toast.error("Wrong Email Address");
       }
-      if (error.response.status == 401) {
-        toast.error("Wrong Password");
+      if (error.response.status === 401) {
+        if (error.response.data.message === "SUSPENDED") {
+          toast.error("Your Account is Suspended");
+          return;
+        }
+        toast.error("Incorrect Password");
       }
     },
   });

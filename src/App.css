@@ -207,3 +207,26 @@
     width: 100% !important;
   }
 }
+
+.sidebar {
+  width: 259px;
+  position: fixed !important;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.admin-outlet-container {
+  margin-left: 19vw !important;
+}
+.admin-dashboard-container {
+  padding: 10px 10px;
+}
+
+.sidebar-container {
+  height: 90vh !important;
+  width: 60% !important;
+  margin-top: 30px;
+}

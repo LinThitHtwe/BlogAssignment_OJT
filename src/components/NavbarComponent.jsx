@@ -13,10 +13,8 @@ const NavbarComponent = () => {
       <Navbar.Brand href="/" className="display-5 w-25 navbar-brand">
         NORDIC ROSE
       </Navbar.Brand>
-      <Navbar.Toggle
-        aria-controls="basic-navbar-nav"
-        style={{ color: "#000" }}
-      />
+
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ms-auto  ">
           <Nav.Link className="nav-link" href="#">
