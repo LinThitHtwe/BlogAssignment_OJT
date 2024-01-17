@@ -15,9 +15,24 @@ const Sidebar = () => {
         >
           <i className="fa-solid fa-grip"></i> Home
         </Nav.Link>
-        <Nav.Link href="#about">About</Nav.Link>
-        <Nav.Link href="#services">Services</Nav.Link>
-        <Nav.Link href="#contact">Contact</Nav.Link>
+        <Nav.Link href="#about">
+          <i className="fa-solid fa-clipboard"></i> Blogs
+        </Nav.Link>
+        <Nav.Link href="#services">
+          <i className="fa-solid fa-users"></i> User Lists
+        </Nav.Link>
+        <Nav.Link href="#services">
+          <i className="fa-solid fa-users"></i> Admin Manaagement
+        </Nav.Link>
+        <Nav.Link href="#services">
+          <i className="fa-solid fa-clipboard"></i> Category
+        </Nav.Link>
+        <Nav.Link href="#services">
+          <i className="fa-solid fa-square-poll-vertical"></i> Block List
+        </Nav.Link>
+        <Nav.Link href="#contact">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </Nav.Link>
       </Nav>
     </Navbar>
   );
