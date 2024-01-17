@@ -222,11 +222,21 @@
   margin-left: 19vw !important;
 }
 .admin-dashboard-container {
-  padding: 10px 10px;
+  padding: 10px 30px;
+  padding-top: 80px;
 }
 
 .sidebar-container {
   height: 90vh !important;
   width: 60% !important;
-  margin-top: 30px;
+  margin-top: 30px !important;
+}
+
+.admin-nav {
+  z-index: 1 !important;
+  width: 84% !important;
+}
+
+.noti-icon {
+  margin-right: 80px;
 }

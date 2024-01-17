@@ -9,7 +9,10 @@ const Sidebar = () => {
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Nav className="d-flex flex-column justify-content-start gap-3 sidebar-container">
-        <Nav.Link href="#home" className="bg-primary">
+        <Nav.Link
+          href="#home"
+          className="bg-primary py-2 px-3 text-light rounded"
+        >
           <i className="fa-solid fa-grip"></i> Home
         </Nav.Link>
         <Nav.Link href="#about">About</Nav.Link>
