@@ -1,14 +1,35 @@
 import { signup } from "api/APIs";
+import routes from "constants/routes";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import { setCookie } from "helpers/setCookie";
 import React from "react";
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
+import toast from "react-hot-toast";
+import { useMutation } from "react-query";
+import { Link, useNavigate } from "react-router-dom";
 import { registerValidationSchema } from "validations/validator";
 
 const Register = () => {
-  const handleSubmit = async (values) => {
-    console.log(values);
-    const response = await signup(values);
-    console.log(response);
+  const navigation = useNavigate();
+  const {
+    mutate: registerUser,
+    isLoading,
+    isError,
+    error,
+  } = useMutation(signup, {
+    onSuccess: (responseData) => {
+      setCookie("authToken", responseData.data.data.token, 8);
+      toast.success("Register Successful");
+      navigation("/");
+    },
+    onError: (error) => {
+      if (error.response.status == 409) {
+        toast.error("User ALready Exist");
+      }
+    },
+  });
+  const handleSubmit = (values) => {
+    registerUser({ ...values, role: "user" });
   };
   return (
     <Container fluid className="overflow-hidden">
@@ -89,6 +110,7 @@ const Register = () => {
 
                   <div className="d-flex flex-column flex-lg-row w-100 mt-5 justify-content-around align-items-center md:gap-4">
                     <Button
+                      disabled={isLoading}
                       type="submit"
                       className="login-signup-btn"
                       variant="dark"
@@ -98,12 +120,18 @@ const Register = () => {
                     </Button>
                     <p className="mt-2 or-text md:mt-3">or</p>
                     <Button
+                      disabled={isLoading}
                       type="button"
                       className="login-signup-btn secondary-btn-login-signup"
                       variant="light"
                       size="lg"
                     >
-                      Sign In
+                      <Link
+                        className="text-decoration-none text-black"
+                        to={routes.login}
+                      >
+                        Sign In
+                      </Link>
                     </Button>
                   </div>
                 </Form>

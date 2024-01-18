@@ -6,6 +6,10 @@ import Login from "../pages/Login";
 import LoginSignupLayout from "../layout/LoginSignupLayout";
 import Register from "pages/Register";
 import routes from "../constants/routes";
+import AdminLayout from "layout/AdminLayout";
+import AdminDashboard from "pages/Admin/AdminDashboard";
+import AdminBlogLists from "pages/Admin/AdminBlogLists";
+import AdminUserLists from "pages/Admin/AdminUserLists";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +38,25 @@ export const router = createBrowserRouter([
       {
         path: routes.register,
         element: <Register />,
+      },
+    ],
+  },
+
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      {
+        path: routes.adminDashboard,
+        element: <AdminDashboard />,
+      },
+      {
+        path: routes.adminBlogList,
+        element: <AdminBlogLists />,
+      },
+      {
+        path: routes.adminUserList,
+        element: <AdminUserLists />,
       },
     ],
   },

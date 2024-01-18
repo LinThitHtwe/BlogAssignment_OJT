@@ -42,7 +42,7 @@ const SignUpForm = () => {
                 onSubmit={handleSubmit}
               >
                 <input
-                  className="w-75 p-3 position-relative"
+                  className="w-75 p-3 "
                   type="email"
                   name="email"
                   onChange={handleChange}
@@ -50,7 +50,7 @@ const SignUpForm = () => {
                   placeholder="Enter Your Email"
                 />
                 {errors.email && (
-                  <p className="position-absolute top-0 left-0">
+                  <p className="position-absolute top- left-0">
                     {errors.email}
                   </p>
                 )}
