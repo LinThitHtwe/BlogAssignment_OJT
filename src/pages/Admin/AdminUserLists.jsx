@@ -1,12 +1,12 @@
-import AdminBlogTable from "components/Admin/AdminBlogTable";
+import AdminUserTable from "components/Admin/AdminUserTable";
 import React from "react";
 import { Button } from "react-bootstrap";
 
-const AdminBlogLists = () => {
+const AdminUserLists = () => {
   return (
     <div className="admin-blog-list-container bg-light">
-      <AdminBlogTable />
-      <div className="d-flex py-3 justify-content-between px-4">
+      <AdminUserTable />
+      <div className="d-flex py-2 justify-content-between px-4">
         <Button variant="primary">Previous</Button>
         <Button variant="primary">Next</Button>
       </div>
@@ -14,4 +14,4 @@ const AdminBlogLists = () => {
   );
 };
 
-export default AdminBlogLists;
+export default AdminUserLists;

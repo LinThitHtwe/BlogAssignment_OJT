@@ -32,9 +32,17 @@ const Sidebar = () => {
         >
           <i className="fa-solid fa-clipboard"></i> Blogs
         </NavLink>
-        <Nav.Link href="#services">
-          <i className="fa-solid fa-users"></i> User Lists
-        </Nav.Link>
+
+        <NavLink
+          to={routes.adminUserList}
+          className={({ isActive }) =>
+            isActive
+              ? "bg-primary py-2 px-3 text-decoration-none text-light rounded"
+              : "text-decoration-none py-2 px-3 text-black"
+          }
+        >
+          <i className="fa-solid fa-users"></i> Users
+        </NavLink>
         <Nav.Link href="#services">
           <i className="fa-solid fa-users"></i> Admin Manaagement
         </Nav.Link>

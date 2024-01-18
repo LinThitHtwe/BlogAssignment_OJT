@@ -223,7 +223,7 @@
 }
 .admin-dashboard-container {
   padding: 10px 30px;
-  padding-top: 80px;
+  padding-top: 100px;
 }
 
 .sidebar-container {
@@ -242,7 +242,6 @@
 }
 
 .admin-blog-list-container {
-  margin-left: 0px !important;
   padding: 100px 20px;
   min-height: 100vh;
 }

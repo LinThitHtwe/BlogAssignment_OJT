@@ -1,5 +1,5 @@
-import AdminBlogOverviewCharts from "components/AdminBlogOverviewCharts";
-import AdminBlogTable from "components/AdminBlogTable";
+import AdminBlogOverviewCharts from "components/Admin/AdminBlogOverviewCharts";
+import AdminBlogTable from "components/Admin/AdminBlogTable";
 import React, { useState } from "react";
 import { Cell, Pie, PieChart, Sector } from "recharts";
 
