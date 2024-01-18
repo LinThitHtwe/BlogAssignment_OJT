@@ -7,7 +7,8 @@ import LoginSignupLayout from "../layout/LoginSignupLayout";
 import Register from "pages/Register";
 import routes from "../constants/routes";
 import AdminLayout from "layout/AdminLayout";
-import AdminDashboard from "pages/AdminDashboard";
+import AdminDashboard from "pages/Admin/AdminDashboard";
+import AdminBlogLists from "pages/Admin/AdminBlogLists";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
       {
         path: routes.adminDashboard,
         element: <AdminDashboard />,
+      },
+      {
+        path: routes.adminBlogList,
+        element: <AdminBlogLists />,
       },
     ],
   },

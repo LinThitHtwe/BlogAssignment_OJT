@@ -5,7 +5,7 @@ import { Cell, Pie, PieChart, Sector } from "recharts";
 
 const AdminDashboard = () => {
   return (
-    <div className="admin-dashboard-container ">
+    <div className="admin-dashboard-container bg-light">
       <AdminBlogOverviewCharts />
       <AdminBlogTable />
     </div>

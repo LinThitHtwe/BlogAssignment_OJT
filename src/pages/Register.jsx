@@ -24,7 +24,7 @@ const Register = () => {
     },
     onError: (error) => {
       if (error.response.status == 409) {
-        toast.error("Email ALready Exist");
+        toast.error("User ALready Exist");
       }
     },
   });

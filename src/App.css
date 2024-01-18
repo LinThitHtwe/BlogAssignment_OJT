@@ -219,7 +219,7 @@
 }
 
 .admin-outlet-container {
-  margin-left: 19vw !important;
+  margin-left: 20vw !important;
 }
 .admin-dashboard-container {
   padding: 10px 30px;
@@ -228,7 +228,7 @@
 
 .sidebar-container {
   height: 90vh !important;
-  width: 60% !important;
+  width: 80% !important;
   margin-top: 30px !important;
 }
 
@@ -239,4 +239,10 @@
 
 .noti-icon {
   margin-right: 80px;
+}
+
+.admin-blog-list-container {
+  margin-left: 0px !important;
+  padding: 100px 20px;
+  min-height: 100vh;
 }
