@@ -11,6 +11,7 @@ import AdminDashboard from "pages/Admin/AdminDashboard";
 import AdminBlogLists from "pages/Admin/AdminBlogLists";
 import AdminUserLists from "pages/Admin/AdminUserLists";
 import UserProfile from "pages/User/UserProfile";
+import AddBlogForm from "pages/User/AddBlogForm";
 
 export const router = createBrowserRouter([
   {
@@ -26,9 +27,14 @@ export const router = createBrowserRouter([
         path: "/blog/:id",
         element: <BlogDetail />,
       },
+
       {
-        path: "/profile/:id",
+        path: "/user/profile/:id",
         element: <UserProfile />,
+      },
+      {
+        path: "/user/blog/add",
+        element: <AddBlogForm />,
       },
     ],
   },

@@ -255,3 +255,30 @@
   width: 105px !important;
   height: 105px !important;
 }
+
+.blog-add-form-container {
+  min-height: 80vh;
+}
+
+.plus-icon {
+  z-index: 1;
+  top: 38px;
+  bottom: 0;
+  left: 50%;
+  cursor: pointer;
+}
+
+.image-input {
+  height: 2.5rem;
+  cursor: pointer;
+}
+
+.blog-textarea {
+  height: 40vh;
+}
+
+@media (width <= 767px) {
+  .blog-textarea {
+    height: 80vh;
+  }
+}
