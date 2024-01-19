@@ -5,7 +5,7 @@ const BlogDetailAuthor = ({ author }) => {
   return (
     <div className="d-flex flex-column justify-content-between flex-md-row">
       <div className="d-flex  gap-2">
-        <img src="profile.png" className="profile-image" />
+        <img src="profile.png" className="profile-image-blog-detail" />
         <div>
           <p className="p-0 text-uppercase font-weight-bold">
             {/* {author.username} */}
