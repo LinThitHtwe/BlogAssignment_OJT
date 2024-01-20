@@ -10,6 +10,7 @@ import AdminLayout from "layout/AdminLayout";
 import AdminDashboard from "pages/Admin/AdminDashboard";
 import AdminBlogLists from "pages/Admin/AdminBlogLists";
 import AdminUserLists from "pages/Admin/AdminUserLists";
+import UserProfile from "pages/User/UserProfile";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: "/blog/:id",
         element: <BlogDetail />,
+      },
+      {
+        path: "/profile/:id",
+        element: <UserProfile />,
       },
     ],
   },

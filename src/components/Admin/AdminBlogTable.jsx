@@ -1,9 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
+import { Button, Modal } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 
 const AdminBlogTable = () => {
+  const [shouldModelOpen, setShouldModelOpen] = useState(false);
   return (
     <div className="p-3 bg-white">
+      <Button variant="primary">Launch demo modal</Button>
+      <Modal
+        show={shouldModelOpen}
+        centered
+        onHide={() => setShouldModelOpen(false)}
+      >
+        <Modal.Header closeButton>Change Status</Modal.Header>
+        <Modal.Body className="d-flex flex-column align-items-center gap-3">
+          <Button
+            variant="primary"
+            className="w-50"
+            onClick={() => setShouldModelOpen(false)}
+          >
+            Accept
+          </Button>
+          <Button
+            variant="danger"
+            className="w-50"
+            onClick={() => setShouldModelOpen(false)}
+          >
+            Reject
+          </Button>
+          <Button
+            variant="outline-secondary"
+            className="w-50"
+            onClick={() => setShouldModelOpen(false)}
+          >
+            Cancel
+          </Button>
+        </Modal.Body>
+      </Modal>
       <table className="table">
         <thead>
           <tr>
@@ -37,7 +70,10 @@ const AdminBlogTable = () => {
             <td>IT</td>
             <td className="text-primary">Accepted</td>
             <td className="d-flex justify-content-around">
-              <span className="text-secondary">
+              <span
+                className="text-secondary"
+                onClick={() => setShouldModelOpen(true)}
+              >
                 <i className="fa-solid fa-pencil"></i>
               </span>
               <span className="text-warning">

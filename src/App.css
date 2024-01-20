@@ -68,7 +68,7 @@
   transform: translate(-50%, -50%);
 }
 
-.profile-image {
+.profile-image-blog-detail {
   border-radius: 32px !important;
   width: 65px !important;
   height: 65px !important;
@@ -244,4 +244,14 @@
 .admin-blog-list-container {
   padding: 100px 20px;
   min-height: 100vh;
+}
+
+.user-profile-container {
+  min-height: 80vh;
+}
+
+.profile-image {
+  border-radius: 60px !important;
+  width: 105px !important;
+  height: 105px !important;
 }
