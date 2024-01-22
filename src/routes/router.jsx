@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
         element: <UserProfile />,
       },
       {
-        path: "/user/blog/add",
+        path: routes.userBlogCreate,
         element: <AddBlogForm />,
       },
     ],

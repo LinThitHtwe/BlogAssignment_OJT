@@ -5,9 +5,9 @@ import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <Navbar bg="white" variant="dark" className="sidebar">
-      <Navbar.Brand href="#home" className="text-primary">
-        Blog Logo
+    <Navbar bg="white" variant="dark" className="sidebar p-0 m-0 ">
+      <Navbar.Brand href="/admin/dashboard" className="text-primary pt-4">
+        NORDIC ROSE
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Nav className="d-flex flex-column justify-content-start gap-3 sidebar-container">
@@ -15,7 +15,7 @@ const Sidebar = () => {
           to={routes.adminDashboard}
           className={({ isActive }) =>
             isActive
-              ? "bg-primary py-2 px-3 text-decoration-none text-light rounded"
+              ? "bg-primary py-2 px-3 w-100 text-decoration-none text-light rounded"
               : "text-decoration-none py-2 px-3 text-black"
           }
         >
@@ -26,7 +26,7 @@ const Sidebar = () => {
           to={routes.adminBlogList}
           className={({ isActive }) =>
             isActive
-              ? "bg-primary py-2 px-3 text-decoration-none text-light rounded"
+              ? "bg-primary py-2 px-3 w-100 text-decoration-none text-light rounded"
               : "text-decoration-none py-2 px-3 text-black"
           }
         >

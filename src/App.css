@@ -209,20 +209,21 @@
 }
 
 .sidebar {
-  width: 259px;
+  width: 180px;
   position: fixed !important;
   height: 100vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: start;
+  padding: 0 !important;
 }
 
 .admin-outlet-container {
   margin-left: 20vw !important;
 }
 .admin-dashboard-container {
-  padding: 10px 30px;
+  padding: 10px 55px;
   padding-top: 100px;
 }
 
@@ -282,3 +283,17 @@
     height: 80vh;
   }
 }
+.piechart-container {
+  position: relative !important;
+}
+
+.dashboard-color-indicator-container {
+  position: absolute !important;
+  top: 100px !important;
+  right: 100px !important;
+  z-index: 3;
+}
+
+/* .admin-user-confirm-model {
+  z-index: -3 !important;
+} */

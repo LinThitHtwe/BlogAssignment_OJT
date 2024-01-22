@@ -3,17 +3,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import { RouterProvider } from "react-router-dom";
-
+import { store } from "./redux/store";
 import { router } from "./routes/router";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Toaster } from "react-hot-toast";
+import { Provider } from "react-redux";
 const queryClient = new QueryClient();
 function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <Toaster position="top-center" />
+        <Provider store={store}>
+          <RouterProvider router={router} />
+          <Toaster position="top-center" />
+        </Provider>
       </QueryClientProvider>
     </>
   );

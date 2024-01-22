@@ -4,6 +4,7 @@ const routes = {
   adminDashboard: "/admin/dashboard",
   adminBlogList: "/admin/blogs",
   adminUserList: "/admin/users",
+  userBlogCreate: "/user/blog/create",
 };
 
 module.exports = routes;

@@ -90,20 +90,20 @@ const AdminBlogOverviewCharts = () => {
 
   return (
     <div className="d-flex justify-content-evenly">
-      <div className="w-100">
+      <div className="w-100 piechart-container">
         <h3>Blog Lists</h3>
 
-        <PieChart className="blog-status-piechart" width={400} height={400}>
+        <PieChart className="blog-status-piechart " width={400} height={300}>
           <Pie
             activeIndex={state}
             onMouseEnter={handleMouseEnter}
             data={data}
-            cx={200}
-            cy={200}
-            innerRadius={80}
-            outerRadius={100}
+            cx={130}
+            cy={130}
+            innerRadius={60}
+            outerRadius={80}
             fill="#8884d8"
-            paddingAngle={5}
+            paddingAngle={3}
             activeShape={renderActiveShape}
             dataKey="value"
           >
@@ -115,6 +115,20 @@ const AdminBlogOverviewCharts = () => {
             ))}
           </Pie>
         </PieChart>
+        <div className="dashboard-color-indicator-container d-flex flex-column ">
+          <div className="d-flex align-items-center gap-2">
+            <i className="fa-solid fa-square text-primary"></i>
+            <span>Approved</span>
+          </div>
+          <div className="d-flex align-items-center gap-2">
+            <i className="fa-solid fa-square text-warning"></i>
+            <span>Pending</span>
+          </div>
+          <div className="d-flex align-items-center gap-2">
+            <i className="fa-solid fa-square text-danger"></i>
+            <span>Reject</span>
+          </div>
+        </div>
       </div>
       <div className="w-100">
         <h3>Blog Information </h3>

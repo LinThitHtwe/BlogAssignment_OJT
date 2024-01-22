@@ -1,42 +1,28 @@
 import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import BlogConfirmModel from "./BlogConfirmModel";
+import { useMutation } from "react-query";
+import toast from "react-hot-toast";
 
-const AdminBlogTable = () => {
+const AdminBlogTable = ({ blogLists }) => {
   const [shouldModelOpen, setShouldModelOpen] = useState(false);
+
+  const getStatusClass = (status) => {
+    switch (status) {
+      case "approved":
+        return "text-primary";
+      case "pending":
+        return "text-warning";
+      case "rejected":
+        return "text-danger";
+      default:
+        return "";
+    }
+  };
+
+  const handleEditClick = (id, status) => {};
+
   return (
     <div className="p-3 bg-white">
-      <Button variant="primary">Launch demo modal</Button>
-      <Modal
-        show={shouldModelOpen}
-        centered
-        onHide={() => setShouldModelOpen(false)}
-      >
-        <Modal.Header closeButton>Change Status</Modal.Header>
-        <Modal.Body className="d-flex flex-column align-items-center gap-3">
-          <Button
-            variant="primary"
-            className="w-50"
-            onClick={() => setShouldModelOpen(false)}
-          >
-            Accept
-          </Button>
-          <Button
-            variant="danger"
-            className="w-50"
-            onClick={() => setShouldModelOpen(false)}
-          >
-            Reject
-          </Button>
-          <Button
-            variant="outline-secondary"
-            className="w-50"
-            onClick={() => setShouldModelOpen(false)}
-          >
-            Cancel
-          </Button>
-        </Modal.Body>
-      </Modal>
       <table className="table">
         <thead>
           <tr>
@@ -48,103 +34,42 @@ const AdminBlogTable = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>John</td>
-            <td>18-Dec-2023</td>
-            <td>Knowledge</td>
-            <td className="text-primary">Accepted</td>
-            <td className="d-flex justify-content-around">
-              <span className="text-secondary">
-                <i className="fa-solid fa-pencil"></i>
-              </span>
-              <span className="text-warning">
-                <i className="fa-solid fa-trash"></i>
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <Link>Jane </Link>
-            </td>
-            <td>18-Dec-2023</td>
-            <td>IT</td>
-            <td className="text-primary">Accepted</td>
-            <td className="d-flex justify-content-around">
-              <span
-                className="text-secondary"
-                onClick={() => setShouldModelOpen(true)}
-              >
-                <i className="fa-solid fa-pencil"></i>
-              </span>
-              <span className="text-warning">
-                <i className="fa-solid fa-trash"></i>
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <Link>Jane </Link>
-            </td>
-            <td>18-Dec-2023</td>
-            <td>Knowledge</td>
-            <td className="text-danger">Rejected</td>
-            <td className="d-flex justify-content-around">
-              <span className="text-secondary">
-                <i className="fa-solid fa-pencil"></i>
-              </span>
-              <span className="text-warning">
-                <i className="fa-solid fa-trash"></i>
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <Link>Jane </Link>
-            </td>
-            <td>18-Dec-2023</td>
-            <td>IT</td>
-            <td className="text-primary">Accepted</td>
-            <td className="d-flex justify-content-around">
-              <span className="text-secondary">
-                <i className="fa-solid fa-pencil"></i>
-              </span>
-              <span className="text-warning">
-                <i className="fa-solid fa-trash"></i>
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <Link>Jane </Link>
-            </td>
-            <td>18-Dec-2023</td>
-            <td>Knowledge</td>
-            <td className="text-warning">Pending</td>
-            <td className="d-flex justify-content-around">
-              <span className="text-secondary">
-                <i className="fa-solid fa-pencil"></i>
-              </span>
-              <span className="text-warning">
-                <i className="fa-solid fa-trash"></i>
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <Link>Jane </Link>
-            </td>
-            <td>18-Dec-2023</td>
-            <td>IT</td>
-            <td className="text-primary">Accepted</td>
-            <td className="d-flex justify-content-around">
-              <span className="text-secondary">
-                <i className="fa-solid fa-pencil"></i>
-              </span>
-              <span className="text-warning">
-                <i className="fa-solid fa-trash"></i>
-              </span>
-            </td>
-          </tr>
+          {blogLists &&
+            blogLists.map((blog) => (
+              <tr key={blog._id}>
+                <td>{blog.creator.username}</td>
+                <td className="text-secondary"> 18-Dec-2023</td>
+                <td className="text-secondary">
+                  {blog.categories.map((category) => (
+                    <span key={category._id}>{category.name}</span>
+                  ))}
+                </td>
+                <td
+                  className={`${getStatusClass(
+                    blog.status
+                  )} text-capitalize fw-bolder`}
+                >
+                  {blog.status}
+                </td>
+                <td className="">
+                  {blog.status == "pending" ? (
+                    <i
+                      onClick={() => setShouldModelOpen(true)}
+                      className="fa-solid fa-pencil text-secondary"
+                    ></i>
+                  ) : (
+                    ""
+                  )}
+                </td>
+                {shouldModelOpen && (
+                  <BlogConfirmModel
+                    setShouldModelOpen={setShouldModelOpen}
+                    shouldModelOpen={shouldModelOpen}
+                    id={blog._id}
+                  />
+                )}
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

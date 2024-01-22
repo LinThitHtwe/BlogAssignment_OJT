@@ -6,7 +6,7 @@ export const loginValidationSchema = Yup.object({
     .required("Email is required"),
   password: Yup.string()
     .required("Password is required")
-    .min(2, "Password must be at least 8 characters")
+    .min(8, "Password must be at least 8 characters")
     .max(20, "Password must not exceed 20 characters"),
 });
 
@@ -20,6 +20,6 @@ export const registerValidationSchema = Yup.object({
     .required("Email is required"),
   password: Yup.string()
     .required("Password is required")
-    .min(2, "Password must be at least 8 characters")
+    .min(8, "Password must be at least 8 characters")
     .max(20, "Password must not exceed 20 characters"),
 });
