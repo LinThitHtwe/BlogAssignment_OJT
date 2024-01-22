@@ -2,9 +2,23 @@ import React, { useState } from "react";
 import BlogConfirmModel from "./BlogConfirmModel";
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
+import { updateBlog } from "api/APIs";
 
-const AdminBlogTable = ({ blogLists }) => {
-  const [shouldModelOpen, setShouldModelOpen] = useState(false);
+const AdminBlogTable = ({ blogLists, refetch }) => {
+  const [selectedBlogId, setSelectedBlogId] = useState(null);
+
+  const { mutate: updatedBlog } = useMutation(
+    ({ id, blog }) => updateBlog(id, blog),
+    {
+      onSuccess: (responseData) => {
+        refetch();
+        toast.success("Register Successful");
+      },
+      onError: (error) => {
+        toast.error("Something Went Wrong :(");
+      },
+    }
+  );
 
   const getStatusClass = (status) => {
     switch (status) {
@@ -19,13 +33,15 @@ const AdminBlogTable = ({ blogLists }) => {
     }
   };
 
-  const handleEditClick = (id, status) => {};
+  const handleChooseStatus = (id, status) =>
+    updatedBlog({ id, blog: { status } });
 
   return (
     <div className="p-3 bg-white">
       <table className="table">
         <thead>
           <tr>
+            <th scope="col">Title</th>
             <th scope="col">User</th>
             <th scope="col">Date In</th>
             <th scope="col">Category</th>
@@ -37,7 +53,8 @@ const AdminBlogTable = ({ blogLists }) => {
           {blogLists &&
             blogLists.map((blog) => (
               <tr key={blog._id}>
-                <td>{blog.creator.username}</td>
+                <td>{blog.title}</td>
+                <td className="text-secondary">{blog.creator.username}</td>
                 <td className="text-secondary"> 18-Dec-2023</td>
                 <td className="text-secondary">
                   {blog.categories.map((category) => (
@@ -54,18 +71,23 @@ const AdminBlogTable = ({ blogLists }) => {
                 <td className="">
                   {blog.status == "pending" ? (
                     <i
-                      onClick={() => setShouldModelOpen(true)}
+                      onClick={() => setSelectedBlogId(blog._id)}
                       className="fa-solid fa-pencil text-secondary"
                     ></i>
                   ) : (
                     ""
                   )}
                 </td>
-                {shouldModelOpen && (
+                {selectedBlogId === blog._id && (
                   <BlogConfirmModel
-                    setShouldModelOpen={setShouldModelOpen}
-                    shouldModelOpen={shouldModelOpen}
+                    setShouldModelOpen={(value) => {
+                      if (!value) {
+                        setSelectedBlogId(null);
+                      }
+                    }}
+                    shouldModelOpen={true}
                     id={blog._id}
+                    action={handleChooseStatus}
                   />
                 )}
               </tr>

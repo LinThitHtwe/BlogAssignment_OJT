@@ -8,6 +8,7 @@ export const signup = (signupData) => API.post("/auth/register", signupData);
 export const getAllBlogs = (query = "") => API.get(`/blog/all?${query}`);
 export const getBlogById = (id) => API.get(`/blog/get/${id}`);
 export const getBlogByUserId = (id) => API.get(`/blog/user/${id}`);
+export const updateBlog = (id, data) => API.put(`/blog/update/${id}`, data);
 
 //User
 export const getAllUser = (query) => API.get(`/user/all?${query}`);

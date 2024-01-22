@@ -1,7 +1,17 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
 
-const BlogConfirmModel = ({ shouldModelOpen, setShouldModelOpen, action }) => {
+const BlogConfirmModel = ({
+  shouldModelOpen,
+  setShouldModelOpen,
+  id,
+  action,
+}) => {
+  const handleClick = (status) => {
+    setShouldModelOpen(false);
+    action(id, status);
+  };
+
   return (
     <Modal
       show={shouldModelOpen}
@@ -13,14 +23,14 @@ const BlogConfirmModel = ({ shouldModelOpen, setShouldModelOpen, action }) => {
         <Button
           variant="primary"
           className="w-50"
-          onClick={() => setShouldModelOpen(false)}
+          onClick={() => handleClick("approved")}
         >
           Accept
         </Button>
         <Button
           variant="danger"
           className="w-50"
-          onClick={() => setShouldModelOpen(false)}
+          onClick={() => handleClick("rejected")}
         >
           Reject
         </Button>

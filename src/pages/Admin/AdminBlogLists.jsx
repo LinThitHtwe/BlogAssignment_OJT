@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 
 const AdminBlogLists = () => {
   const [page, setPage] = useState(1);
-  const { data } = useFetchData(["blogs", page], () =>
+  const { data, refetch } = useFetchData(["blogs", page], () =>
     getAllBlogs(`page=${page}`)
   );
   if (data) {
@@ -14,7 +14,9 @@ const AdminBlogLists = () => {
   }
   return (
     <div className="admin-blog-list-container bg-light">
-      {data && <AdminBlogTable blogLists={data.data.content} />}
+      {data && (
+        <AdminBlogTable blogLists={data.data.content} refetch={refetch} />
+      )}
       <div className="d-flex py-3 justify-content-between px-4">
         <Button disabled={page < 2} variant="primary">
           Previous

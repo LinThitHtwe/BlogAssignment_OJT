@@ -1,22 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import UserAcceptModel from "./UserAcceptModel";
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
-import { getAllUser, updateUser as updateUserAPI } from "api/APIs";
-import useFetchData from "hooks/useFetchData";
+import { updateUser as updateUserAPI } from "api/APIs";
 
-const AdminUserTable = () => {
+const AdminUserTable = ({ users, refetch }) => {
   const [selectedUserId, setSelectedUserId] = useState(null);
-
-  const [page, setPage] = useState(1);
-  const { data, refetch } = useFetchData(["user", page], () => getAllUser(""));
   const { mutate: updateUser } = useMutation(
     ({ id, user }) => updateUserAPI(id, user),
     {
       onSuccess: (responseData) => {
-        console.log(responseData.data);
         refetch();
         toast.success("Register Successful");
       },
@@ -26,10 +20,9 @@ const AdminUserTable = () => {
     }
   );
 
-  if (data) console.log("datatata------", data.data.content);
-
   const handleChooseStatus = (id, status) =>
     updateUser({ id, user: { status } });
+
   return (
     <div className="p-3 bg-white">
       <table className="table">
@@ -43,12 +36,19 @@ const AdminUserTable = () => {
           </tr>
         </thead>
         <tbody>
-          {data &&
-            data.data.content.map((user) => (
+          {users &&
+            users.map((user) => (
               <tr key={user._id}>
                 <td>{user.username}</td>
                 <td className="text-secondary">{user.email}</td>
-                <td className="text-secondary">18-Dec-2023</td>
+                <td className="text-secondary">
+                  {" "}
+                  {new Date(user.createdAt).toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "numeric",
+                    year: "numeric",
+                  })}
+                </td>
                 <td
                   className={`fw-bold text-capitalize ${
                     user.status === "active" ? "text-success" : "text-danger"
@@ -77,7 +77,6 @@ const AdminUserTable = () => {
                     shouldModelOpen={true}
                     id={user._id}
                     action={handleChooseStatus}
-                    refetch={refetch}
                   />
                 )}
               </tr>
