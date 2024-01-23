@@ -6,12 +6,11 @@ import { useLocation } from "react-router-dom";
 
 const AdminNavbar = () => {
   const location = useLocation();
-
   return (
     <Navbar expand="lg" className="bg-white position-fixed admin-nav">
       <Navbar.Brand
         className="p-3 text-capitalize text-muted"
-        href={routes.adminDashboard}
+        href={location.pathname}
       >
         {location.pathname.substring(
           location.pathname.lastIndexOf("/admin/") + 7
