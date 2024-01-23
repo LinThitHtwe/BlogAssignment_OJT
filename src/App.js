@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import { RouterProvider } from "react-router-dom";
-import { store } from "./redux/store";
+import { store } from "./reduxapp/store";
 import { router } from "./routes/router";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Toaster } from "react-hot-toast";

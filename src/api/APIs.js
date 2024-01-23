@@ -9,6 +9,7 @@ export const getAllBlogs = (query = "") => API.get(`/blog/all?${query}`);
 export const getBlogById = (id) => API.get(`/blog/get/${id}`);
 export const getBlogByUserId = (id) => API.get(`/blog/user/${id}`);
 export const updateBlog = (id, data) => API.put(`/blog/update/${id}`, data);
+export const getDashboardData = () => API.get("/blog/dashboard");
 
 //User
 export const getAllUser = (query) => API.get(`/user/all?${query}`);

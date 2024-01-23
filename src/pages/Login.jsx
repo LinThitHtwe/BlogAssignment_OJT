@@ -8,11 +8,10 @@ import toast from "react-hot-toast";
 import routes from "constants/routes";
 import { Link, useNavigate } from "react-router-dom";
 import { setCookie } from "helpers/setCookie";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setUser } from "reduxapp/features/user/userSlice";
 
 const Login = () => {
-  const count = useSelector((state) => state.user.user);
-  console.log(count);
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const {
@@ -25,7 +24,7 @@ const Login = () => {
       setCookie("authToken", responseData.data.data.token, 8);
       toast.success("Register Successful");
       console.log(responseData.data.data);
-      // dispatch(setUser(responseData.data.data));
+      dispatch(setUser(responseData.data.data));
       responseData.data.data.user.role == "user"
         ? navigation("/")
         : navigation("/admin/dashboard");
