@@ -294,5 +294,11 @@
   z-index: 3;
 }
 .limit-select-box {
-  width: 8% !important;
+  width: 9% !important;
+}
+.status-select-box {
+  width: 12% !important;
+}
+.table-search-btn {
+  height: 55% !important;
 }

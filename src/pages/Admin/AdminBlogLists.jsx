@@ -10,7 +10,7 @@ const AdminBlogLists = () => {
   const { data, refetch } = useFetchData(["blogs", page, limit], () =>
     getAllBlogs(`skip=${page}&limit=${limit}`)
   );
-  console.log(limit);
+
   return (
     <div className="admin-blog-list-container bg-light">
       {data && (

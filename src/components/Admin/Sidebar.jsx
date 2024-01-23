@@ -1,9 +1,21 @@
 import routes from "constants/routes";
-import React from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { Button, Container, Modal, Nav, Navbar } from "react-bootstrap";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { removeUser } from "reduxapp/features/user/userSlice";
 
 const Sidebar = () => {
+  const navigation = useNavigate();
+  const dispatch = useDispatch();
+  const [shouldModelAppear, setShouldModelAppear] = useState(false);
+
+  const handleLogout = () => {
+    dispatch(removeUser());
+    toast.success("Logout Successfully");
+    navigation("/");
+  };
   return (
     <Navbar bg="white" variant="dark" className="sidebar p-0 m-0 ">
       <Navbar.Brand href="/admin/dashboard" className="text-primary pt-4">
@@ -52,10 +64,32 @@ const Sidebar = () => {
         <Nav.Link href="#services">
           <i className="fa-solid fa-square-poll-vertical"></i> Block List
         </Nav.Link>
-        <Nav.Link href="#contact">
+        <Nav.Link onClick={() => setShouldModelAppear(true)}>
           <i className="fa-solid fa-arrow-right-from-bracket"></i> Logout
         </Nav.Link>
         <div></div>
+
+        <Modal
+          centered
+          show={shouldModelAppear}
+          onHide={() => setShouldModelAppear(false)}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Logout Confirmation</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Do You Want to Logout?</Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={() => setShouldModelAppear(false)}
+            >
+              No
+            </Button>
+            <Button variant="primary" onClick={handleLogout}>
+              Logout
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Nav>
     </Navbar>
   );

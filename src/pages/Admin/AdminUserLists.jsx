@@ -7,8 +7,14 @@ import { Button } from "react-bootstrap";
 const AdminUserLists = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
-  const { data, refetch } = useFetchData(["user", page, limit], () =>
-    getAllUser(`skip=${page}&limit=${limit}`)
+  const [searchUsername, setSearchUsername] = useState("");
+  const [status, setStatus] = useState("");
+  const { data, refetch } = useFetchData(
+    ["user", page, limit, status, searchUsername],
+    () =>
+      getAllUser(
+        `skip=${page}&limit=${limit}&status=${status}&username=${searchUsername}`
+      )
   );
 
   return (
@@ -19,6 +25,10 @@ const AdminUserLists = () => {
           refetch={refetch}
           limit={limit}
           setLimit={setLimit}
+          status={status}
+          setStatus={setStatus}
+          searchUsername={searchUsername}
+          setSearchUsername={setSearchUsername}
         />
       )}
       {data && (

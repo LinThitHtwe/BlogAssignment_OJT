@@ -4,9 +4,18 @@ import UserAcceptModel from "./UserAcceptModel";
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
 import { updateUser as updateUserAPI } from "api/APIs";
-import { Form } from "react-bootstrap";
+import { Button, Form, FormControl } from "react-bootstrap";
 
-const AdminUserTable = ({ users, refetch, limit, setLimit }) => {
+const AdminUserTable = ({
+  users,
+  refetch,
+  limit,
+  setLimit,
+  status,
+  setStatus,
+  searchUsername,
+  setSearchUsername,
+}) => {
   const [selectedUserId, setSelectedUserId] = useState(null);
   const { mutate: updateUser } = useMutation(
     ({ id, user }) => updateUserAPI(id, user),
@@ -27,22 +36,66 @@ const AdminUserTable = ({ users, refetch, limit, setLimit }) => {
   const handleLimitChange = (event) => {
     setLimit(event.target.value, 10);
   };
+
+  const handleUsernameSearch = (event) => {
+    event.preventDefault();
+    console.log(event.target.elements.searchUsername.value);
+    setSearchUsername(event.target.elements.searchUsername.value);
+  };
+
   return (
     <div className="p-3 bg-white">
       {limit && (
-        <div className="d-flex align-items-center gap-2">
-          <span>Users Per Page :</span>
-          <Form.Select
-            className="my-3 limit-select-box"
-            aria-label="Default select example"
-            onChange={handleLimitChange}
-            value={2}
+        <div className="d-flex justify-content-between">
+          <div className="d-flex align-items-center gap-2 w-100">
+            <span>Users Per Page :</span>
+            <Form.Select
+              className="my-3 limit-select-box"
+              aria-label="Default select example"
+              onChange={handleLimitChange}
+              value={limit}
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+            </Form.Select>
+            <span>Status :</span>
+            <Form.Select
+              className="my-3 status-select-box"
+              aria-label="Default select example"
+              onChange={(event) => setStatus(event.target.value)}
+              value={status}
+            >
+              <option value="">All</option>
+              <option value="active">Active</option>
+              <option value="suspended">Suspended</option>
+            </Form.Select>
+          </div>
+          <Form
+            className="d-flex gap-2 align-items-center"
+            onSubmit={handleUsernameSearch}
           >
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-          </Form.Select>
+            <Form.Group controlId="searchUsername">
+              <FormControl type="text" placeholder="Search Names" />
+            </Form.Group>
+            <Button
+              variant="primary"
+              type="submit"
+              className="table-search-btn"
+            >
+              Search
+            </Button>
+            {searchUsername && (
+              <Button
+                variant="outline-secondary"
+                className="table-search-btn"
+                onClick={() => setSearchUsername("")}
+              >
+                Reset
+              </Button>
+            )}
+          </Form>
         </div>
       )}
       <table className="table">
