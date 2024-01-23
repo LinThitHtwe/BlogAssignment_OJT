@@ -53,7 +53,7 @@ const Sidebar = () => {
           <i className="fa-solid fa-square-poll-vertical"></i> Block List
         </Nav.Link>
         <Nav.Link href="#contact">
-          <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+          <i className="fa-solid fa-arrow-right-from-bracket"></i> Logout
         </Nav.Link>
         <div></div>
       </Nav>

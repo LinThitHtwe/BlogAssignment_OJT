@@ -23,7 +23,6 @@ const Login = () => {
     onSuccess: (responseData) => {
       setCookie("authToken", responseData.data.data.token, 8);
       toast.success("Register Successful");
-      console.log(responseData.data.data);
       dispatch(setUser(responseData.data.data));
       responseData.data.data.user.role == "user"
         ? navigation("/")

@@ -293,7 +293,6 @@
   right: 100px !important;
   z-index: 3;
 }
-
-/* .admin-user-confirm-model {
-  z-index: -3 !important;
-} */
+.limit-select-box {
+  width: 8% !important;
+}

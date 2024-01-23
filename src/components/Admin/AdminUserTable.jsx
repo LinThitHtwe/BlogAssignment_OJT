@@ -4,8 +4,9 @@ import UserAcceptModel from "./UserAcceptModel";
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
 import { updateUser as updateUserAPI } from "api/APIs";
+import { Form } from "react-bootstrap";
 
-const AdminUserTable = ({ users, refetch }) => {
+const AdminUserTable = ({ users, refetch, limit, setLimit }) => {
   const [selectedUserId, setSelectedUserId] = useState(null);
   const { mutate: updateUser } = useMutation(
     ({ id, user }) => updateUserAPI(id, user),
@@ -23,8 +24,27 @@ const AdminUserTable = ({ users, refetch }) => {
   const handleChooseStatus = (id, status) =>
     updateUser({ id, user: { status } });
 
+  const handleLimitChange = (event) => {
+    setLimit(event.target.value, 10);
+  };
   return (
     <div className="p-3 bg-white">
+      {limit && (
+        <div className="d-flex align-items-center gap-2">
+          <span>Users Per Page :</span>
+          <Form.Select
+            className="my-3 limit-select-box"
+            aria-label="Default select example"
+            onChange={handleLimitChange}
+            value={2}
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </Form.Select>
+        </div>
+      )}
       <table className="table">
         <thead>
           <tr className="">

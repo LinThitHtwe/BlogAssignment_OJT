@@ -8,10 +8,10 @@ import { useParams } from "react-router-dom";
 
 const BlogDetail = () => {
   const { id } = useParams();
-  const { data, isLoading } = useFetchData(["blogs"], () => getBlogById(id));
-  if (data) {
-    // console.log(data.data.creator);
-  }
+  const { data, isLoading } = useFetchData(["blogs", id], () =>
+    getBlogById(id)
+  );
+
   return (
     <div className="d-flex flex-column  mt-4  justify-content-center align-items-center gap-4  ">
       <p className="text-center h2 main-blog-title">

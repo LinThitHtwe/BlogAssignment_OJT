@@ -3,8 +3,9 @@ import BlogConfirmModel from "./BlogConfirmModel";
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
 import { updateBlog } from "api/APIs";
+import { Form } from "react-bootstrap";
 
-const AdminBlogTable = ({ blogLists, refetch }) => {
+const AdminBlogTable = ({ blogLists, refetch, limit, setLimit }) => {
   const [selectedBlogId, setSelectedBlogId] = useState(null);
 
   const { mutate: updatedBlog } = useMutation(
@@ -36,8 +37,28 @@ const AdminBlogTable = ({ blogLists, refetch }) => {
   const handleChooseStatus = (id, status) =>
     updatedBlog({ id, blog: { status } });
 
+  const handleLimitChange = (event) => {
+    setLimit(event.target.value, 10);
+  };
+
   return (
     <div className="p-3 bg-white">
+      {limit && (
+        <div className="d-flex align-items-center gap-2">
+          <span>Blogs Per Page :</span>
+          <Form.Select
+            className="my-3 limit-select-box"
+            aria-label="Default select example"
+            onChange={handleLimitChange}
+            value={limit}
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </Form.Select>
+        </div>
+      )}
       <table className="table">
         <thead>
           <tr>
