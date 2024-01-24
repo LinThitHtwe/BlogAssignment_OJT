@@ -15,3 +15,6 @@ export const getDashboardData = () => API.get("/blog/dashboard");
 export const getAllUser = (query) => API.get(`/user/all?${query}`);
 export const getUserById = (userId) => API.get(`user/get/${userId}`);
 export const updateUser = (id, data) => API.put(`user/update/${id}`, data);
+
+//Category
+export const getAllCategories = () => API.get("/category/all");

@@ -22,6 +22,7 @@ const NavbarComponent = () => {
     setShouldModelOpen(false);
     toast.success("Logout Successfully");
   };
+
   return (
     <Navbar
       bg="white"

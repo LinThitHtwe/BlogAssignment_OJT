@@ -14,7 +14,7 @@ const BlogDetailAuthor = ({ author, blogCreatedDate }) => {
     <div className="d-flex flex-column justify-content-between flex-md-row">
       <div className="d-flex  gap-2">
         <img
-          src="profile.png"
+          src="/profile.png"
           className="profile-image-blog-detail"
           alt={`${author.username}`}
         />

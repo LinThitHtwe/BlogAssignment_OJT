@@ -1,11 +1,30 @@
+import { getAllCategories } from "api/APIs";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React from "react";
-import { Button, Dropdown } from "react-bootstrap";
+import useFetchData from "hooks/useFetchData";
+import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
+import ReactSelect from "react-select";
+import { blogFormValidationSchema } from "validations/validator";
 
 const AddBlogForm = () => {
+  const { data } = useFetchData(["categories"], getAllCategories);
+  const [options, setOptions] = useState(null);
+
+  useEffect(() => {
+    if (data) {
+      const option = data.data.map((item) => ({
+        value: item._id,
+        label: item.name,
+      }));
+      setOptions(option);
+    }
+  }, [data]);
   return (
     <div className="blog-add-form-container px-3 px-md-5 py-4 ">
-      <Formik>
+      <Formik
+        initialValues={{ title: "", subTitle: "", content: "" }}
+        validationSchema={blogFormValidationSchema}
+      >
         <Form className="d-flex flex-column align-items-center align-items-md-start flex-md-row gap-md-4">
           <div className="w-100 w-md-50 d-flex align-items-center flex-column gap-5">
             <div className="w-100 w-md-75">
@@ -29,11 +48,11 @@ const AddBlogForm = () => {
               <p
                 className="form-control w-100 w-md-75 image-input"
                 type="text"
-                id="title"
-                name="title"
+                id="subTitle"
+                name="subTitle"
               ></p>
               <ErrorMessage
-                name="title"
+                name="subTitle"
                 component="div"
                 className="text-danger"
               />
@@ -48,47 +67,38 @@ const AddBlogForm = () => {
               <Field
                 className="form-control w-100 w-md-75"
                 type="text"
-                id="title"
-                name="title"
+                id="subTitle"
+                name="subTitle"
                 placeholder="Sub-title"
               />
               <ErrorMessage
-                name="title"
+                name="subTitle"
                 component="div"
                 className="text-danger"
               />
             </div>
-            <Dropdown>
-              <Dropdown.Toggle
-                variant="white"
-                className="text-black"
-                id="dropdown-basic category-d"
-              >
-                Dropdown button
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item href="#">Action</Dropdown.Item>
-                <Dropdown.Item href="#">Another action</Dropdown.Item>
-                <Dropdown.Item href="#">Something else here</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-
+            <ReactSelect
+              isMulti
+              options={options}
+              placeholder="Select options..."
+              className="basic-multi-select"
+              classNamePrefix="select"
+            />
             <div className="">
               <Field
                 className="form-control w-100 blog-textarea w-md-75"
                 as="textarea"
-                id="title"
-                name="title"
+                id="content"
+                name="content"
                 placeholder="Sub-title"
               />
               <ErrorMessage
-                name="title"
+                name="content"
                 component="div"
                 className="text-danger"
               />
             </div>
-            <Button variant="primary" className="py-2 px-3">
+            <Button variant="primary" className="py-2 px-3" type="submit">
               Save
             </Button>
           </div>
