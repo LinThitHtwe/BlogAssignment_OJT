@@ -58,7 +58,7 @@ const NavbarComponent = () => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href="#">
+                <Dropdown.Item href={`/user/profile/${user.user._id}`}>
                   <i className="fa-solid fa-user"></i> Profile
                 </Dropdown.Item>
                 <Dropdown.Divider />

@@ -12,9 +12,9 @@ export const loginValidationSchema = Yup.object({
 
 export const registerValidationSchema = Yup.object({
   username: Yup.string()
-    .required("Password is required")
-    .min(3, "Password must be at least 3 characters")
-    .max(25, "Password must not exceed 25 characters"),
+    .required("Username is required")
+    .min(3, "Username must be at least 3 characters")
+    .max(25, "Username must not exceed 25 characters"),
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
@@ -22,6 +22,9 @@ export const registerValidationSchema = Yup.object({
     .required("Password is required")
     .min(8, "Password must be at least 8 characters")
     .max(20, "Password must not exceed 20 characters"),
+  confirmPassword: Yup.string()
+    .required("Confirm Password is required")
+    .oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
 
 export const blogFormValidationSchema = Yup.object({

@@ -115,7 +115,6 @@ const AdminUserTable = ({
                 <td>{user.username}</td>
                 <td className="text-secondary">{user.email}</td>
                 <td className="text-secondary">
-                  {" "}
                   {new Date(user.createdAt).toLocaleDateString("en-GB", {
                     day: "numeric",
                     month: "numeric",

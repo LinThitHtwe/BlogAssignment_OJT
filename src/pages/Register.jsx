@@ -116,6 +116,21 @@ const Register = () => {
                     />
                   </div>
 
+                  <div>
+                    <Field
+                      className="form-control login-signup-input"
+                      type="password"
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      placeholder="Confirm Password"
+                    />
+                    <ErrorMessage
+                      name="confirmPassword"
+                      component="div"
+                      className="text-danger"
+                    />
+                  </div>
+
                   <div className="d-flex flex-column flex-lg-row w-100 mt-5 justify-content-around align-items-center md:gap-4">
                     <Button
                       disabled={isLoading}

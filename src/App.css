@@ -291,7 +291,7 @@
   position: absolute !important;
   top: 100px !important;
   right: 100px !important;
-  z-index: 3;
+  z-index: 0;
 }
 .limit-select-box {
   width: 9% !important;
@@ -301,4 +301,7 @@
 }
 .table-search-btn {
   height: 55% !important;
+}
+.unauthorize-container {
+  min-height: 80vh !important;
 }
