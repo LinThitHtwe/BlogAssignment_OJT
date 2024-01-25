@@ -10,7 +10,6 @@ const UserBlogList = ({ userId }) => {
   const { data } = useFetchData(["user", "blog", userId, page, limit], () =>
     getBlogByUserId(userId, `page=${page}&limit=${limit}`)
   );
-  if (data) console.log(data.data.totalBlogsCount);
 
   const getStatusClass = (status) => {
     switch (status) {

@@ -305,3 +305,8 @@
 .unauthorize-container {
   min-height: 80vh !important;
 }
+
+.image-upload-edit-container {
+  top: 0;
+  right: 0;
+}

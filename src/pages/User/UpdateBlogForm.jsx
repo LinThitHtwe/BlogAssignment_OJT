@@ -20,7 +20,6 @@ const UpdateBlogForm = () => {
   const user = useSelector((state) => state.user.user);
   const { mutate: updatedBlog } = useMutation(
     ({ id, data }) => {
-      console.log(id);
       updateBlog(id, data);
     },
     {

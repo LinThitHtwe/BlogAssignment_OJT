@@ -6,6 +6,7 @@ import useFetchData from "hooks/useFetchData";
 import React, { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import toast from "react-hot-toast";
+import ReactImageUploading from "react-images-uploading";
 import { useMutation } from "react-query";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,6 +14,11 @@ import ReactSelect from "react-select";
 import { blogFormValidationSchema } from "validations/validator";
 
 const AddBlogForm = () => {
+  const [file, setFile] = useState(null);
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
   const [shouldModelOpen, setShouldModelOpen] = useState(false);
@@ -22,6 +28,15 @@ const AddBlogForm = () => {
   const handleSelectChange = (selectedValues) => {
     const selectedIds = selectedValues.map((option) => option.value);
     setSelectedOptions(selectedIds);
+  };
+
+  const [images, setImages] = useState([]);
+  const maxNumber = 69;
+
+  const onImageChange = (imageList, addUpdateIndex) => {
+    // data for submit
+    console.log(imageList, addUpdateIndex);
+    setImages(imageList);
   };
 
   const {
@@ -53,6 +68,12 @@ const AddBlogForm = () => {
     }
   }, [data]);
 
+  console.log("-------", images);
+  console.log(
+    "--sdadda-----",
+    images.map((image) => image["file"])
+  );
+
   const handleSubmit = (values) => {
     if (selectedOptions.length == 0) {
       toast.error("At Least 1 category should be selected");
@@ -66,10 +87,50 @@ const AddBlogForm = () => {
     });
   };
 
+  // const handleSubmit = async (values) => {
+  //   if (selectedOptions.length == 0) {
+  //     toast.error("At Least 1 category should be selected");
+  //     return;
+  //   }
+
+  //   const formData = new FormData();
+
+  //   formData.append("status", "pending");
+  //   formData.append("title", values.title);
+  //   formData.append("subTitle", values.subTitle);
+  //   formData.append("content", values.content);
+
+  //   // Append each category in the array
+  //   selectedOptions.forEach((category, index) => {
+  //     formData.append(`categories[${index}]`, category);
+  //   });
+
+  //   // Append image data
+  //   images.forEach((image, index) => {
+  //     formData.append(`images[${index}]`, image);
+  //   });
+
+  //   blogData(formData);
+  // };
+  // updatedBlogData.url_list = formData;
+  // console.log("formData---", formData);
+  // const updatedBlogData = {
+  //   ...values,
+  //   categories: selectedOptions,
+  //   status: "pending",
+  // };
+
+  // const imageData = await Promise.all(images.map((image) => image["file"]));
+  // console.log("imageData-----", imageData);
   return (
     <div className="blog-add-form-container px-3 px-md-5 py-4 ">
       <Formik
-        initialValues={{ title: "", subTitle: "", content: "" }}
+        initialValues={{
+          title: "sveeeeeeeeeeeeeeeeee",
+          subTitle: "vseeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          content:
+            "vseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        }}
         validationSchema={blogFormValidationSchema}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(false);
@@ -94,17 +155,76 @@ const AddBlogForm = () => {
               />
             </div>
 
-            <div className="position-relative w-100 w-md-75">
-              <label className="form-label fs-6">Images</label>
-              <p
-                className="form-control w-100 w-md-75 image-input"
-                type="text"
-              ></p>
-
-              <span className="position-absolute plus-icon ">
-                <i className="fa-solid fa-plus"></i>
-              </span>
+            <div>
+              <input type="file" onChange={handleFileChange} />
+              <button>Upload</button>
             </div>
+
+            <ReactImageUploading
+              multiple
+              value={images}
+              onChange={onImageChange}
+              maxNumber={maxNumber}
+              dataURLKey="data_url"
+            >
+              {({
+                imageList,
+                onImageUpload,
+                onImageRemoveAll,
+                onImageUpdate,
+                onImageRemove,
+                isDragging,
+                dragProps,
+              }) => (
+                <div className="position-relative w-100 w-md-75">
+                  <label className="form-label fs-6">Images</label>
+                  <p
+                    style={isDragging ? { color: "red" } : undefined}
+                    onClick={onImageUpload}
+                    {...dragProps}
+                    className="form-control w-100 w-md-75 image-input"
+                    type="text"
+                  ></p>
+                  <span className="position-absolute plus-icon ">
+                    <i className="fa-solid fa-plus"></i>
+                  </span>
+
+                  {imageList.length > 1 && (
+                    <Button variant="danger" onClick={onImageRemoveAll}>
+                      Remove all images
+                    </Button>
+                  )}
+                  {imageList.map((image, index) => (
+                    <div
+                      key={index}
+                      className="d-flex rounded position-relative flex-column align-items-center border p-3 my-2"
+                    >
+                      <img
+                        src={image["data_url"]}
+                        alt=""
+                        className="w-75 rounded"
+                      />
+                      <div className="d-flex flex-column image-upload-edit-container position-absolute justify-content-between  p-3">
+                        <Button
+                          variant="secondary"
+                          className="my-2"
+                          onClick={() => onImageUpdate(index)}
+                        >
+                          <i className="fa-solid fa-pen-to-square"></i>
+                        </Button>
+                        <Button
+                          variant="danger"
+                          className="my-2"
+                          onClick={() => onImageRemove(index)}
+                        >
+                          <i className="fa-solid fa-trash-can"></i>
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </ReactImageUploading>
           </div>
           <div className="w-100 w-md-50 d-flex flex-column gap-4 mt-3 mt-md-0">
             <div>

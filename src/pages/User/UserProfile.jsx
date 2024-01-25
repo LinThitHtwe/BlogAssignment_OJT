@@ -2,13 +2,20 @@ import { getUserById } from "api/APIs";
 import UserBlogList from "components/User/UserBlogList";
 import routes from "constants/routes";
 import useFetchData from "hooks/useFetchData";
+import UnAuthorize from "pages/UnAuthorize";
 import React from "react";
 import { Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 
 const UserProfile = () => {
   const { id } = useParams();
   const { data } = useFetchData(["user", id], () => getUserById(id));
+  const user = useSelector((state) => state.user.user);
+
+  if (!user || user?.user._id != id) {
+    return <UnAuthorize />;
+  }
 
   return (
     <div className="user-profile-container p-5 bg-light">

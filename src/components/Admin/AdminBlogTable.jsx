@@ -4,10 +4,11 @@ import { useMutation } from "react-query";
 import toast from "react-hot-toast";
 import { updateBlog } from "api/APIs";
 import { Form } from "react-bootstrap";
+import SessionExpiredModel from "components/SessionExpiredModel";
 
 const AdminBlogTable = ({ blogLists, refetch, limit, setLimit }) => {
   const [selectedBlogId, setSelectedBlogId] = useState(null);
-
+  const [shouldModelOpen, setShouldModelOpen] = useState(false);
   const { mutate: updatedBlog } = useMutation(
     ({ id, blog }) => updateBlog(id, blog),
     {
@@ -16,7 +17,11 @@ const AdminBlogTable = ({ blogLists, refetch, limit, setLimit }) => {
         toast.success("Register Successful");
       },
       onError: (error) => {
-        toast.error("Something Went Wrong :(");
+        if (error.response.status == 401) {
+          setShouldModelOpen(true);
+          return;
+        }
+        toast.error("Something Went Wrong");
       },
     }
   );
@@ -126,6 +131,7 @@ const AdminBlogTable = ({ blogLists, refetch, limit, setLimit }) => {
             ))}
         </tbody>
       </table>
+      {shouldModelOpen && <SessionExpiredModel />}
     </div>
   );
 };

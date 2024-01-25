@@ -6,6 +6,7 @@ const routes = {
   adminUserList: "/admin/users",
   userBlogCreate: "/user/blog/create",
   userBlogUpdate: "/user/blog/update/:id",
+  categoriesList: "/admin/categories",
 };
 
 module.exports = routes;

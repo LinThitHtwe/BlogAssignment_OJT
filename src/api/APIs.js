@@ -11,7 +11,17 @@ export const getBlogByUserId = (id, query = "") =>
   API.get(`/blog/user/${id}?${query}`);
 export const updateBlog = (id, data) => API.put(`/blog/update/${id}`, data);
 export const getDashboardData = () => API.get("/blog/dashboard");
-export const addBlog = (blogData) => API.post("blog/add", blogData);
+// export const addBlog = (blogData) => {
+//   console.log("blogData---", blogData);
+//   return API.post("blog/add", blogData, {
+//     headers: {
+//       "Content-Type": "multipart/form-data",
+//     },
+//   });
+// };
+export const addBlog = (blogData) => {
+  return API.post("blog/add", blogData);
+};
 
 //User
 export const getAllUser = (query) => API.get(`/user/all?${query}`);
