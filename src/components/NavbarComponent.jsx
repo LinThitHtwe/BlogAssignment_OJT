@@ -10,16 +10,18 @@ import {
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { removeUser } from "reduxapp/features/user/userSlice";
 import toast from "react-hot-toast";
 const NavbarComponent = () => {
   const user = useSelector((state) => state.user.user);
+  const navigate = useNavigate();
   const [shouldModelOpen, setShouldModelOpen] = useState(false);
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(removeUser());
     setShouldModelOpen(false);
+    navigate("/");
     toast.success("Logout Successfully");
   };
 

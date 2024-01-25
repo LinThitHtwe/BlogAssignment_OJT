@@ -21,11 +21,13 @@ const UserProfile = () => {
           <p className="fw-bold">Username : {data && data.data.username}</p>
         </div>
         <div className="d-flex flex-column justify-content-center justify-content-md-start px-5">
-          <p className="py-2 fw-bold">
-            Status :{" "}
-            <span className="text-success">{data && data.data.username}</span>
-          </p>
           <p className="py-2 fw-bold">Email : {data && data.data.email}</p>
+          <p className="py-2 fw-bold">
+            Description :
+            <span className="text-success w-50">
+              {data && data.data.description}
+            </span>
+          </p>
         </div>
       </div>
       <div className="m-3 d-flex justify-content-center justify-content-md-end">

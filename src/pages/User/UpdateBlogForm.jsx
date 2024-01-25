@@ -6,12 +6,14 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";
-import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import ReactSelect from "react-select";
 import { blogFormValidationSchema } from "validations/validator";
 
 const UpdateBlogForm = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [shouldModelOpen, setShouldModelOpen] = useState(false);
   const [initialValues, setInitialValues] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState(null);
