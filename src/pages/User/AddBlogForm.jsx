@@ -7,11 +7,14 @@ import React, { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import ReactSelect from "react-select";
 import { blogFormValidationSchema } from "validations/validator";
 
 const AddBlogForm = () => {
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user.user);
   const [shouldModelOpen, setShouldModelOpen] = useState(false);
   const { data } = useFetchData(["categories"], getAllCategories);
   const [options, setOptions] = useState(null);
@@ -27,12 +30,16 @@ const AddBlogForm = () => {
     isError,
     error,
   } = useMutation(addBlog, {
-    onSuccess: (responseData) => {},
+    onSuccess: (responseData) => {
+      toast.success("Successfully added");
+      navigate(`/user/profile/${user.user._id}`);
+    },
     onError: (error) => {
-      if (error.response.status) {
+      if (error.response.status == 401) {
         setShouldModelOpen(true);
         return;
       }
+      toast.error("Something Went Wrong");
     },
   });
 
@@ -160,7 +167,9 @@ const AddBlogForm = () => {
           </div>
         </Form>
       </Formik>
-      <SessionExpiredModel shouldModelOpen={setShouldModelOpen} />
+      {shouldModelOpen && (
+        <SessionExpiredModel shouldModelOpen={setShouldModelOpen} />
+      )}
     </div>
   );
 };
