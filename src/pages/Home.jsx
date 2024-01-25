@@ -7,7 +7,9 @@ import { useSelector } from "react-redux";
 import MainBlogSkeleton from "skeletons/MainBlogSkeleton";
 
 const Home = () => {
-  const { data, isLoading } = useFetchData(["blogs"], () => getAllBlogs(""));
+  const { data, isLoading } = useFetchData(["blogs"], () =>
+    getAllBlogs("status=approved")
+  );
   return (
     <>
       {data && <MainBlog data={data.data.content[0]} />}

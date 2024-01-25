@@ -14,6 +14,7 @@ import UserProfile from "pages/User/UserProfile";
 import AddBlogForm from "pages/User/AddBlogForm";
 import ProtectedUserRoutes from "layout/ProtectedUserRoutes";
 import ProtectedAdminRoutes from "layout/ProtectedAdminRoutes";
+import UpdateBlogForm from "pages/User/UpdateBlogForm";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
           {
             path: routes.userBlogCreate,
             element: <AddBlogForm />,
+          },
+          {
+            path: routes.userBlogUpdate,
+            element: <UpdateBlogForm />,
           },
         ],
       },

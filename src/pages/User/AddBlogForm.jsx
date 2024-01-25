@@ -1,14 +1,18 @@
 import { addBlog, getAllCategories } from "api/APIs";
+import SessionExpiredModel from "components/SessionExpiredModel";
+import routes from "constants/routes";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import useFetchData from "hooks/useFetchData";
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";
+import { Link } from "react-router-dom";
 import ReactSelect from "react-select";
 import { blogFormValidationSchema } from "validations/validator";
 
 const AddBlogForm = () => {
+  const [shouldModelOpen, setShouldModelOpen] = useState(false);
   const { data } = useFetchData(["categories"], getAllCategories);
   const [options, setOptions] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -25,7 +29,10 @@ const AddBlogForm = () => {
   } = useMutation(addBlog, {
     onSuccess: (responseData) => {},
     onError: (error) => {
-      console.log(error);
+      if (error.response.status) {
+        setShouldModelOpen(true);
+        return;
+      }
     },
   });
 
@@ -40,8 +47,7 @@ const AddBlogForm = () => {
   }, [data]);
 
   const handleSubmit = (values) => {
-    console.log("submit");
-    if (!selectedOptions) {
+    if (selectedOptions.length == 0) {
       toast.error("At Least 1 category should be selected");
       return;
     }
@@ -52,6 +58,7 @@ const AddBlogForm = () => {
       status: "pending",
     });
   };
+
   return (
     <div className="blog-add-form-container px-3 px-md-5 py-4 ">
       <Formik
@@ -153,6 +160,7 @@ const AddBlogForm = () => {
           </div>
         </Form>
       </Formik>
+      <SessionExpiredModel shouldModelOpen={setShouldModelOpen} />
     </div>
   );
 };
