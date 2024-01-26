@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 const MainBlog = ({ data }) => {
   return (
     <div className="d-flex flex-column text-decoration-none text-dark mt-4  justify-content-center align-items-center gap-4  ">
-      <Link to={`/blog/${data?._id}`}>
+      <Link to={`/blog/${data?._id}`} className="main-blog-image-container">
         <img
-          src="image2.png"
-          className="img-fluid mx-auto  "
+          src={data?.url_list[0]}
+          className="w-100 h-100 object-fit-cover  "
           alt="Responsive image"
         />
       </Link>

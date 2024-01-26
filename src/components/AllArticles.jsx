@@ -15,7 +15,7 @@ const AllArticles = ({ blogs }) => {
               >
                 <div className="all-article-image-container">
                   <img
-                    src="image2.png"
+                    src={blogs.url_list[0]}
                     className="img-fluid mx-auto d-block all-article-image"
                     alt="Responsive image"
                   />

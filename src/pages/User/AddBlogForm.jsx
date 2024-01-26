@@ -4,7 +4,7 @@ import routes from "constants/routes";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import useFetchData from "hooks/useFetchData";
 import React, { useEffect, useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import toast from "react-hot-toast";
 import ReactImageUploading from "react-images-uploading";
 import { useMutation } from "react-query";
@@ -34,8 +34,6 @@ const AddBlogForm = () => {
   const maxNumber = 69;
 
   const onImageChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
 
@@ -68,68 +66,28 @@ const AddBlogForm = () => {
     }
   }, [data]);
 
-  console.log("-------", images);
-  console.log(
-    "--sdadda-----",
-    images.map((image) => image["file"])
-  );
-
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     if (selectedOptions.length == 0) {
       toast.error("At Least 1 category should be selected");
       return;
     }
+
     blogData({
       ...values,
       categories: selectedOptions,
-      url_list: ["sdaas"],
+      url_list: await images.map((image) => image["data_url"]),
       status: "pending",
     });
   };
 
-  // const handleSubmit = async (values) => {
-  //   if (selectedOptions.length == 0) {
-  //     toast.error("At Least 1 category should be selected");
-  //     return;
-  //   }
-
-  //   const formData = new FormData();
-
-  //   formData.append("status", "pending");
-  //   formData.append("title", values.title);
-  //   formData.append("subTitle", values.subTitle);
-  //   formData.append("content", values.content);
-
-  //   // Append each category in the array
-  //   selectedOptions.forEach((category, index) => {
-  //     formData.append(`categories[${index}]`, category);
-  //   });
-
-  //   // Append image data
-  //   images.forEach((image, index) => {
-  //     formData.append(`images[${index}]`, image);
-  //   });
-
-  //   blogData(formData);
-  // };
-  // updatedBlogData.url_list = formData;
-  // console.log("formData---", formData);
-  // const updatedBlogData = {
-  //   ...values,
-  //   categories: selectedOptions,
-  //   status: "pending",
-  // };
-
-  // const imageData = await Promise.all(images.map((image) => image["file"]));
-  // console.log("imageData-----", imageData);
   return (
     <div className="blog-add-form-container px-3 px-md-5 py-4 ">
       <Formik
         initialValues={{
-          title: "sveeeeeeeeeeeeeeeeee",
-          subTitle: "vseeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          title: "Why AI matter ?",
+          subTitle: "The rise of AI",
           content:
-            "vseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum facilis hic reiciendis maiores dignissimos assumenda, facere, perferendis culpa eligendi eum officiis temporibus placeat. Dolore cumque aliquam est sequi doloremque!Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum facilis hic reiciendis maiores dignissimos assumenda, facere, perferendis culpa eligendi eum officiis temporibus placeat. Dolore cumque aliquam est sequi doloremque!Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum facilis hic reiciendis maiores dignissimos assumenda, facere, perferendis culpa eligendi eum officiis temporibus placeat. Dolore cumque aliquam est sequi doloremque!Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum facilis hic reiciendis maiores dignissimos assumenda, facere, perferendis culpa eligendi eum officiis temporibus placeat. Dolore cumque aliquam est sequi doloremque!Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum facilis hic reiciendis maiores dignissimos assumenda, facere, perferendis culpa eligendi eum officiis temporibus placeat. Dolore cumque aliquam est sequi doloremque!Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum facilis hic reiciendis maiores dignissimos assumenda, facere, perferendis culpa eligendi eum officiis temporibus placeat. Dolore cumque aliquam est sequi doloremque!Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum facilis hic reiciendis maiores dignissimos assumenda, facere, perferendis culpa eligendi eum officiis temporibus placeat. Dolore cumque aliquam est sequi doloremque!Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit nostrum facilis hic reiciendis maiores dignissimos assumenda, facere, perferendis culpa eligendi eum officiis temporibus placeat. Dolore cumque aliquam est sequi doloremque!",
         }}
         validationSchema={blogFormValidationSchema}
         onSubmit={(values, { setSubmitting }) => {
@@ -161,6 +119,7 @@ const AddBlogForm = () => {
             </div>
 
             <ReactImageUploading
+              resolutionType="less"
               multiple
               value={images}
               onChange={onImageChange}

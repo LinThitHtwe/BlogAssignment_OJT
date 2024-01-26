@@ -310,3 +310,12 @@
   top: 0;
   right: 0;
 }
+
+.main-blog-image-container {
+  width: 70vw !important;
+  height: 60vh !important;
+}
+
+.carousel-img-container {
+  height: 60vh !important;
+}
