@@ -28,7 +28,7 @@ const UpdateBlogForm = () => {
 
   const { mutate: updatedBlog } = useMutation(
     ({ id, data }) => {
-      updateBlog(id, data);
+      return updateBlog(id, data);
     },
     {
       onSuccess: () => {

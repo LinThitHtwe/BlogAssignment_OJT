@@ -41,3 +41,10 @@ export const blogFormValidationSchema = Yup.object({
     .min(40, "Content shoube be at least 40 characters")
     .max(4000, "Content is too loong"),
 });
+
+export const categoryValidationSchema = Yup.object({
+  name: Yup.string()
+    .required("Category required")
+    .min(3, "Category shoube be at least 3 characters")
+    .max(50, "Category is too loong"),
+});

@@ -37,7 +37,8 @@ const Register = () => {
     },
   });
   const handleSubmit = (values) => {
-    registerUser({ ...values, role: "user" });
+    const { confirmPassword, ...filteredValues } = values;
+    registerUser({ ...filteredValues, role: "user" });
   };
   return (
     <Container fluid className="overflow-hidden">

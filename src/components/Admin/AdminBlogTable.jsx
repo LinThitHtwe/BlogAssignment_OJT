@@ -81,7 +81,7 @@ const AdminBlogTable = ({ blogLists, refetch, limit, setLimit }) => {
               <tr key={blog._id}>
                 <td>{blog.title}</td>
                 <td className="text-secondary">{blog.creator.username}</td>
-                <td className="text-secondary">
+                <td className="text-secondary ">
                   {new Date(blog.createdAt).toLocaleDateString("en-GB", {
                     day: "numeric",
                     month: "numeric",
@@ -91,7 +91,7 @@ const AdminBlogTable = ({ blogLists, refetch, limit, setLimit }) => {
                 <td className="d-flex flex-wrap opacity-75">
                   {blog.categories.map((category) => (
                     <span
-                      className="bg-primary rounded text-white py-1 px-2 fw-bold mx-1 my-2"
+                      className="bg-primary rounded text-white py-1 px-2 fw-bold"
                       key={category._id}
                     >
                       {category.name}
