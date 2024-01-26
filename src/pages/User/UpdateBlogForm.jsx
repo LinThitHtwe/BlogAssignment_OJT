@@ -5,6 +5,7 @@ import useFetchData from "hooks/useFetchData";
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import toast from "react-hot-toast";
+import ReactImageUploading from "react-images-uploading";
 import { useMutation } from "react-query";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -18,6 +19,13 @@ const UpdateBlogForm = () => {
   const [initialValues, setInitialValues] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState(null);
   const user = useSelector((state) => state.user.user);
+  const [images, setImages] = useState([]);
+  const maxNumber = 69;
+
+  const onImageChange = (imageList, addUpdateIndex) => {
+    setImages(imageList);
+  };
+
   const { mutate: updatedBlog } = useMutation(
     ({ id, data }) => {
       updateBlog(id, data);
@@ -57,6 +65,7 @@ const UpdateBlogForm = () => {
         subTitle: blog.data?.subTitle || "",
         content: blog.data.content,
       });
+      setImages(blog.data.url_list);
 
       setSelectedCategories(
         blog.data.categories.map((category) => category._id)
@@ -69,7 +78,7 @@ const UpdateBlogForm = () => {
     setSelectedCategories(selectedIds);
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     if (!selectedCategories) {
       toast.error("At Least 1 category should be selected");
       return;
@@ -79,7 +88,7 @@ const UpdateBlogForm = () => {
       data: {
         ...values,
         categories: selectedCategories,
-        url_list: ["sdaas"],
+        url_list: await images.map((image) => image["data_url"] || image),
         status: "pending",
       },
     });
@@ -114,17 +123,72 @@ const UpdateBlogForm = () => {
                 />
               </div>
 
-              <div className="position-relative w-100 w-md-75">
-                <label className="form-label fs-6">Images</label>
-                <p
-                  className="form-control w-100 w-md-75 image-input"
-                  type="text"
-                ></p>
+              <ReactImageUploading
+                resolutionType="less"
+                multiple
+                value={images}
+                onChange={onImageChange}
+                maxNumber={maxNumber}
+                dataURLKey="data_url"
+              >
+                {({
+                  imageList,
+                  onImageUpload,
+                  onImageRemoveAll,
+                  onImageUpdate,
+                  onImageRemove,
+                  isDragging,
+                  dragProps,
+                }) => (
+                  <div className="position-relative w-100 w-md-75">
+                    <label className="form-label fs-6">Images</label>
+                    <p
+                      style={isDragging ? { color: "red" } : undefined}
+                      onClick={onImageUpload}
+                      {...dragProps}
+                      className="form-control w-100 w-md-75 image-input"
+                      type="text"
+                    ></p>
+                    <span className="position-absolute plus-icon ">
+                      <i className="fa-solid fa-plus"></i>
+                    </span>
 
-                <span className="position-absolute plus-icon ">
-                  <i className="fa-solid fa-plus"></i>
-                </span>
-              </div>
+                    {imageList.length > 1 && (
+                      <Button variant="danger" onClick={onImageRemoveAll}>
+                        Remove all images
+                      </Button>
+                    )}
+                    {imageList.map((image, index) => (
+                      <div
+                        key={index}
+                        className="d-flex rounded position-relative flex-column align-items-center border p-3 my-2"
+                      >
+                        <img
+                          src={image["data_url"] || image}
+                          alt=""
+                          className="w-75 rounded"
+                        />
+                        <div className="d-flex flex-column image-upload-edit-container position-absolute justify-content-between  p-3">
+                          <Button
+                            variant="secondary"
+                            className="my-2"
+                            onClick={() => onImageUpdate(index)}
+                          >
+                            <i className="fa-solid fa-pen-to-square"></i>
+                          </Button>
+                          <Button
+                            variant="danger"
+                            className="my-2"
+                            onClick={() => onImageRemove(index)}
+                          >
+                            <i className="fa-solid fa-trash-can"></i>
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </ReactImageUploading>
             </div>
             <div className="w-100 w-md-50 d-flex flex-column gap-4 mt-3 mt-md-0">
               <div>
