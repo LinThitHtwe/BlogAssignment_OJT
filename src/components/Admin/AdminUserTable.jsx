@@ -109,7 +109,7 @@ const AdminUserTable = ({
           </tr>
         </thead>
         <tbody>
-          {users &&
+          {users.length > 0 &&
             users.map((user) => (
               <tr key={user._id}>
                 <td>{user.username}</td>
@@ -153,6 +153,14 @@ const AdminUserTable = ({
                 )}
               </tr>
             ))}
+
+          {users.length == 0 && (
+            <tr>
+              <td colspan="5" className="text-center">
+                No data found
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

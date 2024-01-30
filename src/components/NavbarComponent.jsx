@@ -60,9 +60,16 @@ const NavbarComponent = () => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href={`/user/profile/${user.user._id}`}>
-                  <i className="fa-solid fa-user"></i> Profile
-                </Dropdown.Item>
+                {user.user.role === "admin" ? (
+                  <Dropdown.Item href={`/admin/dashboard/`}>
+                    <i className="fa-solid fa-chart-line"></i> Dashboard
+                  </Dropdown.Item>
+                ) : (
+                  <Dropdown.Item href={`/user/profile/${user.user._id}`}>
+                    <i className="fa-solid fa-user"></i> Profile
+                  </Dropdown.Item>
+                )}
+
                 <Dropdown.Divider />
                 <Dropdown.Item
                   href="#"

@@ -7,9 +7,16 @@ import { Button } from "react-bootstrap";
 const AdminBlogLists = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
-  const { data, refetch } = useFetchData(["blogs", page, limit], () =>
-    getAllBlogs(`skip=${page}&limit=${limit}`)
+  const [status, setStatus] = useState("");
+  const [category, setCategory] = useState("");
+  const { data, refetch } = useFetchData(
+    ["blogs", page, limit, status, category],
+    () =>
+      getAllBlogs(
+        `skip=${page}&limit=${limit}&status=${status}&categoryName=${category}`
+      )
   );
+  console.log(category);
 
   return (
     <div className="admin-blog-list-container bg-light">
@@ -19,6 +26,10 @@ const AdminBlogLists = () => {
           refetch={refetch}
           limit={limit}
           setLimit={setLimit}
+          setStatus={setStatus}
+          status={status}
+          category={category}
+          setCategory={setCategory}
         />
       )}
       {data && (

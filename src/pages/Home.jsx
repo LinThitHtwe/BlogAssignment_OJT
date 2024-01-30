@@ -8,7 +8,7 @@ import MainBlogSkeleton from "skeletons/MainBlogSkeleton";
 
 const Home = () => {
   const { data, isLoading } = useFetchData(["blogs"], () =>
-    getAllBlogs("status=approved")
+    getAllBlogs("status=approved&limit=100")
   );
   return (
     <>

@@ -55,9 +55,6 @@ const Sidebar = () => {
         >
           <i className="fa-solid fa-users"></i> Users
         </NavLink>
-        {/* <Nav.Link href="#services">
-          <i className="fa-solid fa-users"></i> Admin Manaagement
-        </Nav.Link> */}
         <NavLink
           to={routes.categoriesList}
           className={({ isActive }) =>
@@ -68,10 +65,10 @@ const Sidebar = () => {
         >
           <i className="fa-solid fa-clipboard"></i> Category
         </NavLink>
-        <Nav.Link href="#services">
-          <i className="fa-solid fa-square-poll-vertical"></i> Block List
-        </Nav.Link>
-        <Nav.Link onClick={() => setShouldModelAppear(true)}>
+        <Nav.Link
+          className="py-2 px-3"
+          onClick={() => setShouldModelAppear(true)}
+        >
           <i className="fa-solid fa-arrow-right-from-bracket"></i> Logout
         </Nav.Link>
         <div></div>

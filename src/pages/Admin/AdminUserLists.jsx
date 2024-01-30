@@ -9,6 +9,7 @@ const AdminUserLists = () => {
   const [limit, setLimit] = useState(5);
   const [searchUsername, setSearchUsername] = useState("");
   const [status, setStatus] = useState("");
+
   const { data, refetch } = useFetchData(
     ["user", page, limit, status, searchUsername],
     () =>

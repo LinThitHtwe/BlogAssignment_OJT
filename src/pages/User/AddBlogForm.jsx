@@ -112,12 +112,6 @@ const AddBlogForm = () => {
                 className="text-danger"
               />
             </div>
-
-            <div>
-              <input type="file" onChange={handleFileChange} />
-              <button>Upload</button>
-            </div>
-
             <ReactImageUploading
               resolutionType="less"
               multiple

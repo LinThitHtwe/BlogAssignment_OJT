@@ -5,12 +5,18 @@ import useFetchData from "hooks/useFetchData";
 import React, { useState } from "react";
 
 const AdminDashboard = () => {
-  const [page, setPage] = useState(1);
-  const { data } = useFetchData(["blogs", page], getAllBlogs);
+  const { data, refetch } = useFetchData(["blogs-overview"], () =>
+    getAllBlogs("")
+  );
   return (
     <div className="admin-dashboard-container bg-light">
       <AdminBlogOverviewCharts />
-      {data && <AdminBlogTable blogLists={data.data.content} />}
+      {data && (
+        <AdminBlogTable
+          blogLists={data.data.content.slice(0, 5)}
+          refetch={refetch}
+        />
+      )}
     </div>
   );
 };

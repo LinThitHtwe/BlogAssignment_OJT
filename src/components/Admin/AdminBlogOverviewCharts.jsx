@@ -136,13 +136,13 @@ const AdminBlogOverviewCharts = () => {
       <div className="w-100">
         <h3>Blog Information </h3>
         <div className="d-flex flex-column gap-2 mt-5 align-items-center">
-          <div className="bg-primary p-3 w-75 rounded text-light text-center font-weight-bold">
+          <div className="bg-primary p-3 w-75 rounded text-light text-center fw-bold">
             {data && data.data[0].value}
           </div>
-          <div className="bg-warning p-3 w-75 rounded text-light text-center font-weight-bold">
+          <div className="bg-warning p-3 w-75 rounded text-light text-center fw-bold">
             {data && data.data[1].value}
           </div>
-          <div className="bg-danger p-3 w-75 rounded text-light text-center font-weight-bold">
+          <div className="bg-danger p-3 w-75 rounded text-light text-center fw-bold">
             {data && data.data[2].value}
           </div>
         </div>

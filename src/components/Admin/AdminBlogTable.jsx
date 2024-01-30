@@ -1,20 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BlogConfirmModel from "./BlogConfirmModel";
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
-import { updateBlog } from "api/APIs";
+import { getAllCategories, updateBlog } from "api/APIs";
 import { Form } from "react-bootstrap";
 import SessionExpiredModel from "components/SessionExpiredModel";
+import useFetchData from "hooks/useFetchData";
 
-const AdminBlogTable = ({ blogLists, refetch, limit, setLimit }) => {
+const AdminBlogTable = ({
+  blogLists,
+  refetch,
+  limit,
+  setLimit,
+  status,
+  setStatus,
+  setCategory,
+  category,
+}) => {
   const [selectedBlogId, setSelectedBlogId] = useState(null);
   const [shouldModelOpen, setShouldModelOpen] = useState(false);
+  const { data: categories } = useFetchData(["categories"], getAllCategories);
+
   const { mutate: updatedBlog } = useMutation(
     ({ id, blog }) => updateBlog(id, blog),
     {
-      onSuccess: (responseData) => {
+      onSuccess: () => {
         refetch();
-        toast.success("Register Successful");
+        toast.success("Updated Successfully");
       },
       onError: (error) => {
         if (error.response.status == 401) {
@@ -46,22 +58,60 @@ const AdminBlogTable = ({ blogLists, refetch, limit, setLimit }) => {
     setLimit(event.target.value, 10);
   };
 
+  console.log();
+
   return (
     <div className="p-3 bg-white">
       {limit && (
-        <div className="d-flex align-items-center gap-2">
-          <span>Blogs Per Page :</span>
-          <Form.Select
-            className="my-3 limit-select-box"
-            aria-label="Default select example"
-            onChange={handleLimitChange}
-            value={limit}
-          >
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-          </Form.Select>
+        <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center gap-2 w-100">
+            <span>Blogs Per Page :</span>
+            <Form.Select
+              className="my-3 limit-select-box"
+              aria-label="Default select example"
+              onChange={handleLimitChange}
+              value={limit}
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+            </Form.Select>
+            <span>Status :</span>
+            <Form.Select
+              className="my-3 status-select-box"
+              aria-label="Default select example"
+              onChange={(event) => setStatus(event.target.value)}
+              value={status}
+            >
+              <option value="">All</option>
+              <option value="approved">Approved</option>
+              <option value="pending">Pending</option>
+              <option value="rejected">Rejected</option>
+            </Form.Select>
+            {categories && (
+              <>
+                <span>Category :</span>
+                <Form.Select
+                  className="my-3 status-select-box"
+                  aria-label="Default select example"
+                  onChange={(event) => setCategory(event.target.value)}
+                  value={category}
+                >
+                  <option value="">All</option>
+                  {categories.data.map((category) => (
+                    <option
+                      key={category._id}
+                      value={category.name}
+                      className="text-capitalize"
+                    >
+                      {category.name}
+                    </option>
+                  ))}
+                </Form.Select>
+              </>
+            )}
+          </div>
         </div>
       )}
       <table className="table">
@@ -76,7 +126,7 @@ const AdminBlogTable = ({ blogLists, refetch, limit, setLimit }) => {
           </tr>
         </thead>
         <tbody>
-          {blogLists &&
+          {blogLists.length > 0 &&
             blogLists.map((blog) => (
               <tr key={blog._id}>
                 <td>{blog.title}</td>
@@ -106,14 +156,10 @@ const AdminBlogTable = ({ blogLists, refetch, limit, setLimit }) => {
                   {blog.status}
                 </td>
                 <td className="">
-                  {blog.status == "pending" ? (
-                    <i
-                      onClick={() => setSelectedBlogId(blog._id)}
-                      className="fa-solid fa-pencil text-secondary"
-                    ></i>
-                  ) : (
-                    ""
-                  )}
+                  <i
+                    onClick={() => setSelectedBlogId(blog._id)}
+                    className="fa-solid fa-pencil text-secondary"
+                  ></i>
                 </td>
                 {selectedBlogId === blog._id && (
                   <BlogConfirmModel
@@ -129,6 +175,14 @@ const AdminBlogTable = ({ blogLists, refetch, limit, setLimit }) => {
                 )}
               </tr>
             ))}
+
+          {blogLists.length == 0 && (
+            <tr>
+              <td colspan="6" className="text-center">
+                No data found
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
       {shouldModelOpen && <SessionExpiredModel />}
