@@ -1,14 +1,12 @@
+import { getDashboardData } from "api/APIs";
+import useFetchData from "hooks/useFetchData";
 import React, { useState } from "react";
 import { Cell, Pie, PieChart, Sector } from "recharts";
 
 const AdminBlogOverviewCharts = () => {
   const [state, setState] = useState();
+  const { data } = useFetchData(["blog", "dashboard"], getDashboardData);
 
-  const data = [
-    { name: "Approved", value: 10 },
-    { name: "Pending", value: 8 },
-    { name: "Reject", value: 3 },
-  ];
   const COLORS = ["#0d6efd", "#ffc107", "#dc3545"];
 
   const renderActiveShape = (props) => {
@@ -87,46 +85,65 @@ const AdminBlogOverviewCharts = () => {
   const handleMouseEnter = (_, index) => {
     setState(index);
   };
+  if (data) {
+    console.log(data);
+  }
 
   return (
     <div className="d-flex justify-content-evenly">
-      <div className="w-100">
+      <div className="w-100 piechart-container">
         <h3>Blog Lists</h3>
+        {data && (
+          <PieChart className="blog-status-piechart" width={400} height={300}>
+            <Pie
+              activeIndex={state}
+              onMouseEnter={handleMouseEnter}
+              data={data.data}
+              cx={130}
+              cy={130}
+              innerRadius={60}
+              outerRadius={80}
+              fill="#8884d8"
+              paddingAngle={3}
+              activeShape={renderActiveShape}
+              dataKey="value"
+            >
+              {data.data.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+          </PieChart>
+        )}
 
-        <PieChart className="blog-status-piechart" width={400} height={400}>
-          <Pie
-            activeIndex={state}
-            onMouseEnter={handleMouseEnter}
-            data={data}
-            cx={200}
-            cy={200}
-            innerRadius={80}
-            outerRadius={100}
-            fill="#8884d8"
-            paddingAngle={5}
-            activeShape={renderActiveShape}
-            dataKey="value"
-          >
-            {data.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-        </PieChart>
+        <div className="dashboard-color-indicator-container d-flex flex-column ">
+          <div className="d-flex align-items-center gap-2">
+            <i className="fa-solid fa-square text-primary"></i>
+            <span>Approved</span>
+          </div>
+          <div className="d-flex align-items-center gap-2">
+            <i className="fa-solid fa-square text-warning"></i>
+            <span>Pending</span>
+          </div>
+          <div className="d-flex align-items-center gap-2">
+            <i className="fa-solid fa-square text-danger"></i>
+            <span>Reject</span>
+          </div>
+        </div>
       </div>
       <div className="w-100">
         <h3>Blog Information </h3>
         <div className="d-flex flex-column gap-2 mt-5 align-items-center">
-          <div className="bg-primary p-3 w-75 rounded text-light text-center font-weight-bold">
-            10
+          <div className="bg-primary p-3 w-75 rounded text-light text-center fw-bold">
+            {data && data.data[0].value}
           </div>
-          <div className="bg-warning p-3 w-75 rounded text-light text-center font-weight-bold">
-            8
+          <div className="bg-warning p-3 w-75 rounded text-light text-center fw-bold">
+            {data && data.data[1].value}
           </div>
-          <div className="bg-danger p-3 w-75 rounded text-light text-center font-weight-bold">
-            3
+          <div className="bg-danger p-3 w-75 rounded text-light text-center fw-bold">
+            {data && data.data[2].value}
           </div>
         </div>
       </div>

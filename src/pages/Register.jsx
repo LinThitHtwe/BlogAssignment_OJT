@@ -6,11 +6,14 @@ import React from "react";
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { setUser } from "reduxapp/features/user/userSlice";
 import { registerValidationSchema } from "validations/validator";
 
 const Register = () => {
   const navigation = useNavigate();
+  const dispatch = useDispatch();
   const {
     mutate: registerUser,
     isLoading,
@@ -20,16 +23,22 @@ const Register = () => {
     onSuccess: (responseData) => {
       setCookie("authToken", responseData.data.data.token, 8);
       toast.success("Register Successful");
-      navigation("/");
+      dispatch(setUser(responseData.data.data));
+      responseData.data.data.user.role == "user"
+        ? navigation("/")
+        : navigation("/admin/dashboard");
     },
     onError: (error) => {
       if (error.response.status == 409) {
         toast.error("User ALready Exist");
+        return;
       }
+      toast.error("Something Went Wrong");
     },
   });
   const handleSubmit = (values) => {
-    registerUser({ ...values, role: "user" });
+    const { confirmPassword, ...filteredValues } = values;
+    registerUser({ ...filteredValues, role: "user" });
   };
   return (
     <Container fluid className="overflow-hidden">
@@ -103,6 +112,21 @@ const Register = () => {
                     />
                     <ErrorMessage
                       name="password"
+                      component="div"
+                      className="text-danger"
+                    />
+                  </div>
+
+                  <div>
+                    <Field
+                      className="form-control login-signup-input"
+                      type="password"
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      placeholder="Confirm Password"
+                    />
+                    <ErrorMessage
+                      name="confirmPassword"
                       component="div"
                       className="text-danger"
                     />

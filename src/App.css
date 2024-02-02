@@ -209,20 +209,21 @@
 }
 
 .sidebar {
-  width: 259px;
+  width: 180px;
   position: fixed !important;
   height: 100vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: start;
+  padding: 0 !important;
 }
 
 .admin-outlet-container {
   margin-left: 20vw !important;
 }
 .admin-dashboard-container {
-  padding: 10px 30px;
+  padding: 10px 55px;
   padding-top: 100px;
 }
 
@@ -254,4 +255,67 @@
   border-radius: 60px !important;
   width: 105px !important;
   height: 105px !important;
+}
+
+.blog-add-form-container {
+  min-height: 80vh;
+}
+
+.plus-icon {
+  z-index: 1;
+  top: 38px;
+  bottom: 0;
+  left: 50%;
+  cursor: pointer;
+}
+
+.image-input {
+  height: 2.5rem;
+  cursor: pointer;
+}
+
+.blog-textarea {
+  height: 40vh;
+}
+
+@media (width <= 767px) {
+  .blog-textarea {
+    height: 80vh;
+  }
+}
+.piechart-container {
+  position: relative !important;
+}
+
+.dashboard-color-indicator-container {
+  position: absolute !important;
+  top: 100px !important;
+  right: 100px !important;
+  z-index: 0;
+}
+.limit-select-box {
+  width: 9% !important;
+}
+.status-select-box {
+  width: 12% !important;
+}
+.table-search-btn {
+  height: 55% !important;
+}
+.unauthorize-container {
+  min-height: 80vh !important;
+}
+
+.image-upload-edit-container {
+  top: 0;
+  right: 0;
+}
+
+.main-blog-image-container {
+  width: 70vw !important;
+  height: 60vh !important;
+}
+
+.carousel-img-container {
+  height: 60vh !important;
 }
